@@ -47,7 +47,7 @@ please only edit files in /src/ folder
 
 - [x] Create Wireframe
 - [x] Create basic structure
-- [ ] Add Task View Formulario (Javier) lo encuentras en src/views/AddView.vue
+- [ ] Add Task View Formulario (Javier) lo encuentras en src/views/AddTaskView.vue
 - [ ] Filter View Formulario (LLuis)  lo encuentras en src/views/FilterView.vue
 
 
