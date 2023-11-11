@@ -9,11 +9,6 @@
     <ion-content :fullscreen="true">
      
 
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Inbox</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
     
     </ion-content>
@@ -24,10 +19,7 @@
 import {
   IonContent,
   IonHeader,
-  IonList,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
   IonTitle,
   IonToolbar,
 } from '@ionic/vue';
