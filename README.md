@@ -49,9 +49,7 @@ please only edit files in /src/ folder
 - [x] Create basic structure
 - [ ] Add Task View Formulario (Javier)  // lo encuentras en src/views/AddView.vue
 - [ ] Filter View Formulario (LLuis)  // lo encuentras en src/views/FilterView.vue
-- [ ] Multi-language Support
-    - [ ] English
-    - [ ] Spanish
+
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
