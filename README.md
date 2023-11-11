@@ -4,9 +4,9 @@
 
 Universidad La Salle - Task App project
 
-[![Product Name Screen Shot][product-screenshot]][Figma-url]{:target="_blank" rel="noopener"}
+[![Product Name Screen Shot][product-screenshot]][Figma-url]
 
-[open in Figma][Figma-url]{:target="_blank" rel="noopener"}
+[open in Figma][Figma-url]
 
 
 ### Built With
@@ -17,7 +17,7 @@ Universidad La Salle - Task App project
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+To install follow these steps:
 
 1. Clone the repo
    ```sh
@@ -38,7 +38,7 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-only edit files in /src/ folder
+please only edit files in /src/ folder
 
 
 
