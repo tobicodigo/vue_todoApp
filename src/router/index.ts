@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import MainView from '../views/MainView.vue'
+import FilterView from '../views/FilterView.vue'
+import AddTaskView from '../views/AddTaskView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,6 +13,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'Home',
     component: MainView
+  },
+  {
+    path: '/filter',
+    name: 'Filter',
+    component: FilterView
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: AddTaskView
   },
   
 ]
