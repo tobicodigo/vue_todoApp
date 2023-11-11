@@ -11,6 +11,6 @@
 
 <script setup lang="ts">
 import { IonContent, IonHeader, IonPage } from "@ionic/vue";
-import ToolBar from "../components/ToolBar.vue";
+import ToolBar from "../components/Ui/ToolBar.vue";
 import { ref } from "vue";
 </script>

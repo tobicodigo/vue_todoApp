@@ -2,7 +2,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Universidad La Salle - Task App project
+Universidad La Salle - Task App Project
 
 [![Product Name Screen Shot][product-screenshot]][Figma-url]
 
@@ -41,6 +41,16 @@ To install follow these steps:
 please only edit files in /src/ folder
 
 
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Create Wireframe
+- [x] Create basic structure
+- [ ] Add Components
+- [ ] Multi-language Support
+    - [ ] English
+    - [ ] Spanish
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
