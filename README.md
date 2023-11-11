@@ -4,9 +4,9 @@
 
 Universidad La Salle - Task App project
 
-[![Product Name Screen Shot][product-screenshot]]([Figma-url])
+[![Product Name Screen Shot][product-screenshot]][Figma-url]
 
-[open in Figma]([Figma-url])
+[open in Figma][Figma-url]
 
 
 ### Built With
@@ -47,4 +47,4 @@ only edit files in /src/ folder
 [product-screenshot]: figma.png
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
 [Vue-url]: https://vuejs.org/
-[Figma-url]: https://www.figma.com/file/BX5I9TkSCGDfPRFjv4IIUm/La-Salle?type=design&node-id=0%3A1&mode=design&t=eOF3BVwBx8I1iHft-1)
+[Figma-url]: https://www.figma.com/file/BX5I9TkSCGDfPRFjv4IIUm/La-Salle?type=design&node-id=0%3A1&mode=design&t=eOF3BVwBx8I1iHft-1
