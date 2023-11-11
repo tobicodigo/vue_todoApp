@@ -4,9 +4,9 @@
 
 Universidad La Salle - Task App project
 
-[![Product Name Screen Shot][product-screenshot]][Figma-url]
+[![Product Name Screen Shot][product-screenshot]][Figma-url]{:target="_blank" rel="noopener"}
 
-[open in Figma][Figma-url]
+[open in Figma][Figma-url]{:target="_blank" rel="noopener"}
 
 
 ### Built With
