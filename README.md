@@ -6,15 +6,10 @@
 
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 ### Built With
 
 * [![Vue][Vue.js]][Vue-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Installation
@@ -34,7 +29,6 @@ _Below is an example of how you can instruct your audience on installing and set
    npm run dev
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -43,5 +37,10 @@ _Below is an example of how you can instruct your audience on installing and set
 
 only edit files in /src/ folder
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[product-screenshot]: figma.png
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
