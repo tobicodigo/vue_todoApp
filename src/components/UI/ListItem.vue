@@ -1,95 +1,95 @@
 <template>
-
-<li>
-      <input type="checkbox" :id="task.id"/>
+  <li>
+    <div class="inputSpan"><input type="checkbox" :id="task.id" /></div>
+    <div class="content">
       <label :for="task.id">
-        <h2>{{ task.title }}</h2><span>{{ task.description }}</span>
+        <h2>{{ task.title }}</h2>
+        <span class="description">{{ task.description }}</span>
       </label>
-    </li>
-
-
+    </div>
+    <div class="editSpan">
+      <span class="category">{{ store.state.categories[task.category] }}</span>
+      <span class="color"></span>
+      <span class="editButton">
+      <ion-button href="/edit" fill="clear"><ion-img class="editButton" src="../../../resources/menu.png"></ion-img></ion-button>
+      </span>
+    </div>
+  </li>
 </template>
 
 <script setup>
+import { useStore } from "vuex";
+const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
 </script>
 
-<style>
-
-input[type=checkbox] {
-  display: none;
+<style scoped>
+.category {
+  margin-right: 30px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
 }
 
-label {
-  background: #d2d3d5;
-  height: 120px;
-  width: 100%;
-  display: block;
-  border-bottom: 1px solid #2c3e50;
-  color: white;
-  font-size: 11px;
-  font-weight: 900;
-  cursor: pointer;
-  text-transform: capitalize; 
-  letter-spacing: 1px;
-  position: relative;
-  padding: 5px 5px 5px 70px;
-  box-sizing:  border-box;
-  
+.color {
+  min-width: 30px;
+  min-height: 30px;
+  width: 30px;
+  height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: red;
 }
+
+.editButton {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+
+
 h2 {
-    padding-top:-500px;
-    top: -100px;
-    margin-top: -100px;
-    line-height: 500px;
+  color: #ad9797;
 }
 
-
-label:before{
-  content:"";
-  width: 19px;
-  height: 19px;
-  border: 1px solid #416282;
-  display: block;
-  position: absolute;
-  left: 20px;
-  top: 20px;
- /* transition: border .7s ease;*/
-  border-radius: 100%; 
-  z-index: 99999;
+.description {
+  color: #ad9797;
 }
 
-label:after{
-  content:"";
-  width: 60px;
-  height: 120px;
-  background: #2c3e50;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-    
+li {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #f6f2f2;
+}
+.inputSpan {
+  height: 100%;
+  width: 5%;
+  flex-grow: 0;
+  display: inline-block;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: white;
+  text-align: center;
+}
+.content {
+  height: 100%;
+  width: 60%;
+  flex-grow: 0;
+  display: inline-block;
+  padding: 20px 10px 10px 10px;
 }
 
-li:first-child label{
-  border-right: 8px solid #f87c85;
-  /*text-transform: uppercase;*/
+.editSpan {
+  height: 100%;
+  width: 35%;
+  flex-grow: 0;
+  display: inline-block;
+  text-align: right;
 }
 
-li:nth-child(2) label{
-  border-right: 8px solid orange;
+h2 {
+  margin-top: 0px;
 }
-
-li:nth-child(3) label{
-  border-right: 8px solid #b985ea;
-}
-
-li:nth-child(4) label{
-  border-right: 8px solid #3498db;
-}
-
-li:last-child label{
-  border-right: 8px solid #43d6b0;
-}
-
 </style>

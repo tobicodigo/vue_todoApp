@@ -30,7 +30,8 @@ import { ref } from "vue";
 <style scoped>
 
 ion-title {
-  font-size: 2vw;
+  font-size: 3vw;
+  color: #fce3e3;
 }
 
 ion-col {
