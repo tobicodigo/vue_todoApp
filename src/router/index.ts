@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import MainView from '../views/MainView.vue'
+import ProfileView from '../views/ProfileView.vue'
 import FilterView from '../views/FilterView.vue'
 import AddTaskView from '../views/AddTaskView.vue';
 
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/add',
     name: 'Add',
     component: AddTaskView
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: ProfileView
   },
   
 ]

@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { createI18n } from 'vue-i18n'
+import messages from './language/translations.js'
 import router from './router';
+import store from './store/store';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -23,9 +26,18 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+const i18n = createI18n({
+  locale:window.navigator.language,
+  fallbackLocale: 'en', 
+  messages,
+})
+
+
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(i18n)
+  .use(router)
+  .use(store);
   
 router.isReady().then(() => {
   app.mount('#app');
