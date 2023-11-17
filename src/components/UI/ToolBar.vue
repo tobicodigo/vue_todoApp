@@ -12,7 +12,7 @@
           <ion-button href="/card" fill="clear"><ion-img src="../../../resources/cards.png"></ion-img></ion-button>
           <ion-button href="/filter" fill="clear"><ion-img src="../../../resources/filter.png"></ion-img></ion-button>
           <ion-button href="/add" fill="clear"><ion-img src="../../../resources/add.png"></ion-img></ion-button>
-          <ion-button href="/profile" fill="clear"><ion-img src="../../../resources/profile.png"></ion-img></ion-button>
+          <ion-button href="/register" fill="clear"><ion-img src="../../../resources/profile.png"></ion-img></ion-button>
 
         </ion-col>
       </ion-row>

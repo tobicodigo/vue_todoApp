@@ -4,6 +4,7 @@ import MainView from '../views/MainView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import FilterView from '../views/FilterView.vue'
 import AddTaskView from '../views/AddTaskView.vue';
+import RegisterView from '@/views/RegisterView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/profile',
     name: 'Profile',
     component: ProfileView
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: RegisterView
   },
   
 ]
