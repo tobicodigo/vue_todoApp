@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     component: MainView
   },
   {
+    path: '/card',
+    name: 'Card',
+    component: MainView
+  },
+  {
     path: '/filter',
     name: 'Filter',
     component: FilterView

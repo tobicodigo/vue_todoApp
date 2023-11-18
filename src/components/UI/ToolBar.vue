@@ -9,7 +9,9 @@
           <search-bar></search-bar>
         </ion-col>
         <ion-col>
-          <ion-button href="/card" fill="clear"><ion-img src="../../../resources/cards.png"></ion-img></ion-button>
+          <ion-button v-if="viewType!='Card'" href="/card" fill="clear"><ion-img src="../../../resources/cards.png"></ion-img></ion-button>
+          <ion-button v-else href="/home" fill="clear"><ion-img src="../../../resources/list.png"></ion-img></ion-button>
+
           <ion-button href="/filter" fill="clear"><ion-img src="../../../resources/filter.png"></ion-img></ion-button>
           <ion-button href="/add" fill="clear"><ion-img src="../../../resources/add.png"></ion-img></ion-button>
           <ion-button href="/register" fill="clear"><ion-img src="../../../resources/profile.png"></ion-img></ion-button>
@@ -23,6 +25,8 @@
 <script setup lang="ts">
 import { IonTitle, IonToolbar, IonButton,IonGrid,IonCol,IonRow,IonImg } from "@ionic/vue";
 import SearchBar from "../UI/Searchbar.vue";
+const props = defineProps(["viewType"]);
+const viewType = props.viewType;
 
 import { ref } from "vue";
 </script>

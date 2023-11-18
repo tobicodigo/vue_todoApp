@@ -9,7 +9,7 @@
     </div>
     <div class="editSpan">
       <span class="category">{{ store.state.categories[task.category] }}</span>
-      <span class="color" :style="{ backgroundColor: activeColor, fontSize: fontSize + 'px' }"></span> 
+      <span class="color" :style="{ backgroundColor: activeColor }"></span> 
       <span class="editButton">
       <ion-button href="/edit" fill="clear"><ion-img class="editButton" src="../../../resources/menu.png"></ion-img></ion-button>
       </span>
@@ -18,14 +18,14 @@
 </template>
 
 <script setup>
+import { IonButton,IonImg } from "@ionic/vue";
 import { ref } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
 
-const activeColor = ref(store.state.colors[task.color])
-const fontSize = ref(30)
+const activeColor = ref("var("+store.state.colors[task.color]+")")
 
 
 </script>
