@@ -1,15 +1,11 @@
 <template>
-  <ul v-if="viewType!='Card'">
+  <ul v-if="props.viewType != 'card'">
     <List-item
       v-for="task in store.state.tasks"
       :task="task"
       :key="task.id"
     ></List-item>
   </ul>
-
-
-
-
 
   <ul v-else class="cardList">
     <Card-item
@@ -18,19 +14,15 @@
       :key="task.id"
     ></Card-item>
   </ul>
-
 </template>
 
 <script setup>
 import ListItem from "../components/UI/ListItem.vue";
 import CardItem from "../components/UI/CardItem.vue";
-
 import { useStore } from "vuex";
 const store = useStore();
 
 const props = defineProps(["viewType"]);
-const viewType = props.viewType;
-
 </script>
 
 <style>
@@ -46,6 +38,6 @@ ul {
 }
 
 .cardList {
-  width:100%;
+  width: 100%;
 }
 </style>

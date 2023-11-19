@@ -30,6 +30,8 @@ const i18n = createI18n({
   locale:window.navigator.language,
   fallbackLocale: 'en', 
   messages,
+  legacy: false,
+
 })
 
 

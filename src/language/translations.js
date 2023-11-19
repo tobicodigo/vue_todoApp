@@ -1,6 +1,10 @@
 const messages = {
   en: {
-    myTasks: "My Tasks",
+    home: "My Tasks",
+    card: "My Tasks",
+    filter: "Filter Tasks",
+    add: "Add Task",
+    register: "Registration",
     search: "Search",
     homework: "Homework",
     school: "School",
@@ -9,7 +13,11 @@ const messages = {
     private: "Provate",
   },
   es: {
-    myTasks: "Mis Tareas",
+    home: "Mis Tareas",
+    card: "Mis Tareas",
+    filter: "Filtrar Tareas",
+    add: "Añadir Tarea",
+    register: "Crear cuenta",
     search: "Busqueda",
     homework: "Tarea",
     school: "Escuela",
@@ -18,7 +26,11 @@ const messages = {
     private: "Privado",
   },
   de: {
-    myTasks: "Meine ToDo",
+    home: "Meine ToDo",
+    card: "Meine ToDo",
+    filter: "Filter",
+    add: "Hinzufügen",
+    register: "Registrierung",
     search: "Suche",
     homework: "Hausaufgabe",
     school: "Schule",

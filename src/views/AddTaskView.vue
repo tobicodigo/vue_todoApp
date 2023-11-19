@@ -1,8 +1,4 @@
 <template>
-  <ion-toolbar>
-    <ion-button href="/home">Back</ion-button>
-    <h1 class="title">Add Task</h1>
-  </ion-toolbar>
 
   <form class="form" @submit.prevent="submitForm" style="margin-left: 2rem;">
     <div>

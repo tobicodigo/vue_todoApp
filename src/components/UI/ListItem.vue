@@ -9,25 +9,28 @@
     </div>
     <div class="editSpan">
       <span class="category">{{ store.state.categories[task.category] }}</span>
-      <span class="color" :style="{ backgroundColor: activeColor }"></span> 
+      <span class="color" :style="{ backgroundColor: activeColor }"></span>
       <span class="editButton">
-      <ion-button href="/edit" fill="clear"><ion-img class="editButton" src="../../../resources/menu.png"></ion-img></ion-button>
+        <ion-button href="/edit" fill="clear"
+          ><ion-img
+            class="editButton"
+            src="../../../resources/menu.png"
+          ></ion-img
+        ></ion-button>
       </span>
     </div>
   </li>
 </template>
 
 <script setup>
-import { IonButton,IonImg } from "@ionic/vue";
+import { IonButton, IonImg } from "@ionic/vue";
 import { ref } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
 
-const activeColor = ref("var("+store.state.colors[task.color]+")")
-
-
+const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 </script>
 
 <style scoped>
@@ -53,8 +56,6 @@ const activeColor = ref("var("+store.state.colors[task.color]+")")
   margin-right: 10px;
   padding: 5px;
 }
-
-
 
 h2 {
   color: #ad9797;

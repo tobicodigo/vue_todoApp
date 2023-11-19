@@ -1,52 +1,51 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
-import MainView from '../views/MainView.vue'
-import ProfileView from '../views/ProfileView.vue'
-import FilterView from '../views/FilterView.vue'
-import AddTaskView from '../views/AddTaskView.vue';
-import RegisterView from '@/views/RegisterView.vue';
+import { createRouter, createWebHistory } from "@ionic/vue-router";
+import { RouteRecordRaw } from "vue-router";
+import MainView from "../views/MainView.vue";
+import ProfileView from "../views/ProfileView.vue";
+import FilterView from "../views/FilterView.vue";
+import AddTaskView from "../views/AddTaskView.vue";
+import RegisterView from "@/views/RegisterView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    redirect: '/home'
+    path: "/",
+    redirect: "/home",
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: MainView
+    path: "/home",
+    name: "home",
+    component: MainView,
   },
   {
-    path: '/card',
-    name: 'Card',
-    component: MainView
+    path: "/card",
+    name: "card",
+    component: MainView,
   },
   {
-    path: '/filter',
-    name: 'Filter',
-    component: FilterView
+    path: "/filter",
+    name: "filter",
+    component: FilterView,
   },
   {
-    path: '/add',
-    name: 'Add',
-    component: AddTaskView
+    path: "/add",
+    name: "add",
+    component: AddTaskView,
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: ProfileView
+    path: "/profile",
+    name: "profile",
+    component: ProfileView,
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: RegisterView
+    path: "/register",
+    name: "register",
+    component: RegisterView,
   },
-  
-]
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

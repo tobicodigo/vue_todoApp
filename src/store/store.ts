@@ -1,12 +1,12 @@
 import { createStore } from "vuex";
-import { createI18n } from 'vue-i18n'
-import messages from '../language/translations.js'
+import { createI18n } from "vue-i18n";
+import messages from "../language/translations.js";
 
 const i18n = createI18n({
-  locale:window.navigator.language,
-  fallbackLocale: 'en', 
+  locale: window.navigator.language,
+  fallbackLocale: "en",
   messages,
-})
+});
 
 const store = createStore({
   state: {
@@ -80,7 +80,7 @@ const store = createStore({
         title: "Test3",
         description: "This a test description",
         category: 3,
-        color: 2,
+        color: 4,
         startDate: 1700312795,
         endDate: 1700399195,
         assignee: "Javier",
@@ -103,13 +103,7 @@ const store = createStore({
       i18n.global.t("family"),
       i18n.global.t("private"),
     ],
-    colors: [
-     "--pink",
-      "--blue",
-      "--green",
-      "--orange",
-      "--purple",
-    ],
+    colors: ["--yellow", "--blue", "--green", "--orange", "--pink"],
   },
   mutations: {},
 });

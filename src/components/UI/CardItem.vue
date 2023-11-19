@@ -1,5 +1,5 @@
 <template>
-  <div class="content-card" >
+  <div class="content-card">
     <div class="card-big-shadow">
       <div
         class="card card-just-text"
@@ -28,16 +28,15 @@ const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
 
-const activeColor = ref("var("+store.state.colors[task.color]+")")
-console.log(activeColor.value)
+const activeColor = ref("var(" + store.state.colors[task.color] + ")");
+console.log(activeColor.value);
 </script>
 
 <style scoped>
-
 .content-card {
-   max-width: 400px;
-    display: inline-block;
-margin: 40px;
+  max-width: 400px;
+  display: inline-block;
+  margin: 40px;
 }
 .card-big-shadow {
   max-width: 400px;
@@ -132,11 +131,11 @@ a:focus {
 
 /*======== COLORS ===========*/
 
-.card[data-color="var(--pink)"] .description {
+.card[data-color="var(--yellow)"] .description {
   color: #772510;
 }
-.card[data-color="var(--pink)"] .category {
-  color: rgb(248, 204, 252);
+.card[data-color="var(--yellow)"] .category {
+  color: #c7a11a;
 }
 
 .card[data-color="var(--blue)"] .description {
@@ -152,7 +151,6 @@ a:focus {
   color: #c3f059;
 }
 
-
 .card[data-color="var(--orange)"] .description {
   color: #772510;
 }
@@ -160,14 +158,10 @@ a:focus {
   color: #e95e37;
 }
 
-.card[data-color="var(--purple)"] .description {
-  color: #3a283d;
+.card[data-color="var(--pink)"] .description {
+  color: #772510;
 }
-.card[data-color="var(--purple)"] .category {
-  color: #5a283d;
+.card[data-color="var(--pink)"] .category {
+  color: rgb(248, 204, 252);
 }
-
-
-
-
 </style>
