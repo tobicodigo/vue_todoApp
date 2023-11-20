@@ -1,6 +1,6 @@
 <template>
   <li>
-    <div class="inputSpan"><toggle :checked="task.isDone" /></div>
+    <div class="inputSpan"><toggle :checked="task.isDone" checkmark="true" /></div>
 
     <div class="content">
       <h2>{{ task.title }}</h2>

@@ -1,15 +1,16 @@
 <template>
 
 <input id="toggle" class="toggle" type="checkbox" role="switch" name="toggle" value="on" :checked="checked">
-<label for="toggle" class="slot">
+<label for="toggle" class="slot" v-bind:style="props.checkmark ? 'display: inline-block;' :  'display: none;' ">
   <span class="slot__label">&nbsp;</span>
   <span class="slot__label">✔︎</span>
 </label>
 </template>
 
 <script setup>
-const props = defineProps(["checked"]);
-const task = props.task;
+
+const props = defineProps(["checked","checkmark"]);
+
 </script>
 
 <style scoped>
@@ -30,6 +31,8 @@ const task = props.task;
   .toggle:focus {
     outline: transparent;
   }
+
+  
   .toggle {
     border-radius: 0.75em;
     box-shadow: 0 0 0 0.1em inset;
@@ -71,8 +74,9 @@ const task = props.task;
     letter-spacing: 0.1em;
     line-height: 1;
     height: 1em;
-    -webkit-text-stroke: 0.05em #fff;
+    -webkit-text-stroke: 0.01em #fff;
   }
+  
 
 
 

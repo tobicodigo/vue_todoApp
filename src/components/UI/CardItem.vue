@@ -8,6 +8,14 @@
         data-radius="none"
         :style="{ backgroundColor: activeColor }"
       >
+        <div class="cardHeader">
+          <toggle :checked="task.isDone" :checkmark="false"></toggle>
+          <ion-img
+            class="editButton" 
+            src="../../../resources/menu_black_stroke.png"
+          ></ion-img>
+        </div>
+
         <div class="content">
           <h6 class="category">{{ store.state.categories[task.category] }}</h6>
           <h4 class="title">{{ task.title }}</h4>
@@ -24,15 +32,23 @@
 <script setup>
 import { ref } from "vue";
 import { useStore } from "vuex";
+import toggle from "./Toggle.vue";
+
 const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
 
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
-console.log(activeColor.value);
 </script>
 
 <style scoped>
+.editButton {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+
 .content-card {
   max-width: 400px;
   display: inline-block;
@@ -58,6 +74,12 @@ console.log(activeColor.value);
   margin-bottom: 20px;
   position: relative;
   z-index: 1;
+}
+
+.cardHeader {
+  padding-left: 5px;
+  padding-top: 5px;
+  text-align: right;
 }
 
 .card[data-background="image"] .title,

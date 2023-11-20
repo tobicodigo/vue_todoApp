@@ -1,6 +1,7 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+
 /** Ionic CSS Variables **/
 :root {
   --yellow: #F5E053;
@@ -8,7 +9,7 @@ http://ionicframework.com/docs/theming/ */
   --green: #86AF85;
   --orange: #ff8f5e;
   --pink: #FF5BAE;
-
+ 
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
