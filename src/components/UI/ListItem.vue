@@ -1,11 +1,10 @@
 <template>
   <li>
-    <div class="inputSpan"><input type="checkbox" :id="task.id" /></div>
+    <div class="inputSpan"><toggle :checked="task.isDone" /></div>
+
     <div class="content">
-      <label :for="task.id">
-        <h2>{{ task.title }}</h2>
-        <span class="description">{{ task.description }}</span>
-      </label>
+      <h2>{{ task.title }}</h2>
+      <span class="description">{{ task.description }}</span>
     </div>
     <div class="editSpan">
       <span class="category">{{ store.state.categories[task.category] }}</span>
@@ -24,6 +23,7 @@
 
 <script setup>
 import { IonButton, IonImg } from "@ionic/vue";
+import toggle from "./Toggle.vue";
 import { ref } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
@@ -51,13 +51,14 @@ const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 }
 
 .editButton {
+  margin-top: -10px;
   width: 50px;
   height: 50px;
   margin-right: 10px;
-  padding: 5px;
 }
 
 h2 {
+  margin-top: 30px;
   color: #ad9797;
 }
 
@@ -66,36 +67,36 @@ h2 {
 }
 
 li {
+  height: 100%;
+  min-height: 100px;
   background-color: rgb(255, 255, 255);
   border: 1px solid #f6f2f2;
 }
 .inputSpan {
   height: 100%;
-  width: 5%;
+  width: 10%;
   flex-grow: 0;
   display: inline-block;
-  padding-top: 50px;
-  padding-bottom: 50px;
   background-color: white;
   text-align: center;
+  padding-left: 2.1em;
 }
 .content {
   height: 100%;
-  width: 60%;
+  width: 50%;
   flex-grow: 0;
   display: inline-block;
-  padding: 20px 10px 10px 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .editSpan {
-  height: 100%;
-  width: 35%;
+  height: 50%;
+  width: 40%;
   flex-grow: 0;
   display: inline-block;
   text-align: right;
-}
-
-h2 {
-  margin-top: 0px;
+  padding-bottom: 30px;
+  padding-top: 20px ;
 }
 </style>

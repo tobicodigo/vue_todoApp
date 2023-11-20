@@ -24,6 +24,7 @@ const store = createStore({
         startDate: 1700226395,
         endDate: 1700312795,
         assignee: "Cesc",
+        isDone: false,
       },
       {
         id: 2,
@@ -34,6 +35,7 @@ const store = createStore({
         startDate: 1700312795,
         endDate: 1700399195,
         assignee: "Tobi",
+        isDone: true,
       },
       {
         id: 3,
@@ -44,6 +46,7 @@ const store = createStore({
         startDate: 1700312795,
         endDate: 1700399195,
         assignee: "Javier",
+        isDone: true,
       },
       {
         id: 4,
@@ -54,6 +57,7 @@ const store = createStore({
         startDate: 1700312795,
         endDate: 1700485595,
         assignee: "Lluis",
+        isDone: false,
       },
       {
         id: 5,
@@ -64,6 +68,7 @@ const store = createStore({
         startDate: 1700226395,
         endDate: 1700312795,
         assignee: "Cesc",
+        isDone: false,
       },
       {
         id: 6,
@@ -74,6 +79,7 @@ const store = createStore({
         startDate: 1700312795,
         endDate: 1700399195,
         assignee: "Tobi",
+        isDone: true,
       },
       {
         id: 7,
@@ -84,6 +90,7 @@ const store = createStore({
         startDate: 1700312795,
         endDate: 1700399195,
         assignee: "Javier",
+        isDone: false,
       },
       {
         id: 8,
@@ -94,6 +101,7 @@ const store = createStore({
         startDate: 1700312795,
         endDate: 1700485595,
         assignee: "Lluis",
+        isDone: false,
       },
     ],
     categories: [
