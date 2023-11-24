@@ -4,8 +4,8 @@ import { createI18n } from 'vue-i18n'
 import messages from './language/translations.js'
 import router from './router';
 import store from './store/store';
-
 import { IonicVue } from '@ionic/vue';
+import { createVfm } from 'vue-final-modal'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -34,11 +34,14 @@ const i18n = createI18n({
 
 })
 
+const vfm = createVfm()
+
 
 const app = createApp(App)
   .use(IonicVue)
   .use(i18n)
   .use(router)
+  .use(vfm)
   .use(store);
   
 router.isReady().then(() => {

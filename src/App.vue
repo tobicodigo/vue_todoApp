@@ -1,6 +1,8 @@
 <template>
   <ion-app>
     <ion-page>
+      <ModalsContainer />
+
       <ion-header :translucent="true">
         <tool-bar :viewType="route.name" :heading="heading"></tool-bar>
       </ion-header>
@@ -16,13 +18,20 @@
 import { IonApp, IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
-import ToolBar from "./components/UI/ToolBar.vue";
+import ToolBar from "./components/ToolBar.vue";
 import { useRoute } from "vue-router";
+import 'vue-final-modal/style.css'
+
+import { ModalsContainer } from 'vue-final-modal'
+
 const route = useRoute();
 const { t } = useI18n();
 
 const heading = computed(() => {
-  return t(route.name);
+  if(!route.name) {
+    return t("home");
+  }
+  return t(route.name.toString());
 });
 </script>
 

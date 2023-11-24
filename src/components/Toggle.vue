@@ -1,6 +1,6 @@
 <template>
 
-<input id="toggle" class="toggle" type="checkbox" role="switch" name="toggle" value="on" :checked="checked">
+<input id="toggle" class="toggle" type="checkbox" role="switch" name="toggle" value="on" :checked="checked" v-model="isDone" @change="$emit('setDone', isDone)">
 <label for="toggle" class="slot" v-bind:style="props.checkmark ? 'display: inline-block;' :  'display: none;' ">
   <span class="slot__label">&nbsp;</span>
   <span class="slot__label">✔︎</span>
@@ -8,8 +8,11 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 
 const props = defineProps(["checked","checkmark"]);
+const emits = defineEmits(["setDone"])
+const isDone = ref()
 
 </script>
 

@@ -19,7 +19,18 @@
             <ion-button fill="clear"
               ><ion-img src="../../../resources/list.png"></ion-img></ion-button
           ></router-link>
-
+          <ion-button fill="clear" @click="changeDirection"
+              >
+              <ion-img v-if="store.state.sortDirection==='up'"
+                src="../../../resources/sort_up.png"
+              ></ion-img>
+              <ion-img v-else-if="store.state.sortDirection==='down'"
+                src="../../../resources/sort_down.png"
+              ></ion-img>
+              <ion-img v-else
+                src="../../../resources/sort.png"
+              ></ion-img>
+            </ion-button>
           <router-link to="/filter"
             ><ion-button href="/filter" fill="clear"
               ><ion-img
@@ -52,8 +63,24 @@ import {
   IonRow,
   IonImg,
 } from "@ionic/vue";
-import SearchBar from "../UI/Searchbar.vue";
+import SearchBar from "./Searchbar.vue";
+import { useStore } from "vuex";
+const store = useStore();
 const props = defineProps(["viewType", "heading"]);
+
+function changeDirection() {
+ 
+    if(store.state.sortDirection==="") {
+      store.state.sortDirection="up"
+    } else
+    if(store.state.sortDirection==="up") {
+      store.state.sortDirection="down"
+    } else
+    if(store.state.sortDirection==="down") {
+      store.state.sortDirection="up"
+    }
+}
+
 </script>
 
 <style scoped>

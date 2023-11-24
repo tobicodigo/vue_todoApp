@@ -9,53 +9,89 @@
         :style="{ backgroundColor: activeColor }"
       >
         <div class="cardHeader">
-          <toggle :checked="task.isDone" :checkmark="false"></toggle>
-          <ion-img
-            class="editButton" 
-            src="../../../resources/menu_black_stroke.png"
-          ></ion-img>
+          
+          <toggle
+            :checked="task.isDone"
+            :checkmark="false"
+            @setDone="(i) => (task.isDone = i)"
+          ></toggle>
+          <router-link :to="'/edit/task/' + task.id">
+            <ion-img
+              class="editButton"
+              src="../../../resources/menu_black_stroke.png"
+            ></ion-img>
+          </router-link>
         </div>
 
         <div class="content">
-          <h6 class="category">{{ store.state.categories[task.category] }}</h6>
+          <h6 class="category">{{ store.state.types[task.type] }}</h6>
           <h4 class="title">{{ task.title }}</h4>
           <p class="description">
             {{ task.description }}
           </p>
+          
         </div>
+        <div class="dueDate">{{ remainingDays }} {{$t('daysLeft')}} | {{ formattedDate }} </div>
+
       </div>
+
       <!-- end card -->
     </div>
   </div>
 </template>
 
 <script setup>
+import { IonImg } from "@ionic/vue";
 import { ref } from "vue";
-import { useStore } from "vuex";
 import toggle from "./Toggle.vue";
-
+import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
+const i18n = useI18n();
 const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
 
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
+
+const dueDateTimeStamp = new Date(task.dueDate).getTime()
+const difference = Math.abs(dueDateTimeStamp - (Date.now()));
+const remainingDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+const formattedDate = new Date(task.dueDate).toLocaleDateString(i18n.locale.value);
+
 </script>
 
 <style scoped>
+
+h4 {
+  font-size:x-large;
+  font-weight: bold;
+  padding-bottom: 15px;
+  padding-top: 20px;
+}
 .editButton {
   width: 30px;
   height: 30px;
   display: inline-block;
+  cursor: pointer;
 }
 
+.dueDate {
+  position: relative;
+  color: white;
+  width: 300px;
+  padding: 5px;
+  text-align: right;
+}
 
 .content-card {
-  max-width: 400px;
+  width: 300px;
   display: inline-block;
   margin: 40px;
+  max-height: 400px;
 }
 .card-big-shadow {
-  max-width: 400px;
+  width: 300px;
   position: relative;
 }
 
@@ -101,7 +137,7 @@ const activeColor = ref("var(" + store.state.colors[task.color] + ")");
   color: #ffffff;
 }
 .card.card-just-text .content {
-  padding: 50px 65px;
+  padding: 40px 65px 65px 65px;
   text-align: center;
 }
 .card .content {

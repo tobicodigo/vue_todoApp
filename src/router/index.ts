@@ -3,7 +3,7 @@ import { RouteRecordRaw } from "vue-router";
 import MainView from "../views/MainView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import FilterView from "../views/FilterView.vue";
-import AddTaskView from "../views/AddTaskView.vue";
+import TaskDetailsView from "../views/TaskDetailsView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -29,7 +29,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/add",
     name: "add",
-    component: AddTaskView,
+    component: TaskDetailsView,
+  },
+  {
+    path: "/edit/task/:id",
+    name: "edit",
+    component: TaskDetailsView,
   },
   {
     path: "/profile",
@@ -41,6 +46,8 @@ const routes: Array<RouteRecordRaw> = [
     name: "register",
     component: RegisterView,
   },
+  { path: '/:pathMatch(.*)*', name: 'home', component: MainView },
+
 ];
 
 const router = createRouter({
