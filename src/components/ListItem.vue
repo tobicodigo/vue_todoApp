@@ -1,25 +1,36 @@
 <template>
-  <li>
-    <div class="toggleContainer"><toggle :checked="task.isDone" checkmark="true" @setDone="(i) => task.isDone = i"></toggle></div>
+  <li class="flex flex-wrap justify-content">
+    <div class="toggleContainer xl:w-1/12 lg:w-1/6 p-4">
+      <toggle
+        :checked="task.isDone"
+        checkmark="true"
+        @setDone="(i) => (task.isDone = i)"
+      ></toggle>
+    </div>
 
-    <div class="content">
+    <div class="content xl:w-7/12 lg:w-1/2 p-4">
       <h2>{{ task.title }}</h2>
-      <div class="dueDate">{{ remainingDays }} {{$t('daysLeft')}} | {{ formattedDate }} </div>
+      <div class="dueDate">
+        {{ remainingDays }} <span class="dueDate" v-if="remainingDays===1">{{ $t("dayLeft") }} </span><span class="dueDate" v-else>{{ $t("daysLeft") }}</span>
+        <ion-img class="clockImage"
+                src="../../../resources/clock.png"
+              ></ion-img> {{ formattedDate }}
+      </div>
 
       <div class="description">{{ task.description }}</div>
     </div>
-    <div class="editContainer">
+    <div class="editContainer xl:w-2/12 sm:w-1/2 lg:w-1/5 p-4">
       <span class="category">{{ store.state.types[task.type] }}</span>
-      <span class="color" :style="{ backgroundColor : activeColor }"></span>
+      <span class="color" :style="{ backgroundColor: activeColor }"></span>
       <span class="editButton">
         <router-link :to="'/edit/task/' + task.id">
-        <ion-button fill="clear"
-          ><ion-img
-            class="editButton"
-            src="../../../resources/menu.png"
-          ></ion-img
-        ></ion-button>
-      </router-link>
+          <ion-button fill="clear"
+            ><ion-img
+              class="editButton"
+              src="../../../resources/menu.png"
+            ></ion-img
+          ></ion-button>
+        </router-link>
       </span>
     </div>
   </li>
@@ -39,18 +50,18 @@ const task = props.task;
 
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 
-const dueDateTimeStamp = new Date(task.dueDate).getTime()
-const difference = Math.abs(dueDateTimeStamp - (Date.now()));
+const dueDateTimeStamp = new Date(task.dueDate).getTime();
+const difference = Math.abs(dueDateTimeStamp - Date.now());
 const remainingDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
-const formattedDate = new Date(task.dueDate).toLocaleDateString(i18n.locale.value);
-
+const formattedDate = new Date(task.dueDate).toLocaleDateString(
+  i18n.locale.value
+);
 </script>
 
 <style scoped>
-
 h2 {
-  font-size:x-large;
+  font-size: x-large;
   font-weight: bold;
   padding-bottom: 5px;
 }
@@ -74,22 +85,31 @@ h2 {
   margin-top: -10px;
   width: 50px;
   height: 50px;
-  margin-right: 10px;
 }
 
 h2 {
-  margin-top: 30px;
+  margin-top: 10px;
   color: #ad9797;
 }
 
+.flex {
+  justify-content: center;
+}
 .description {
   padding-top: 10px;
   color: #ad9797;
 }
 
 .dueDate {
-  display: block;
   color: #97a1ad;
+  padding-right:5px;
+}
+
+.clockImage{
+  margin-top:-3px;
+  display: inline-block;
+  width: 20px;
+  vertical-align: middle;
 }
 
 li {
@@ -99,30 +119,24 @@ li {
   border: 1px solid #f6f2f2;
 }
 .toggleContainer {
-  width: 150px;
-  height:100%;
-
-  display:inline;
   background-color: white;
-  text-align: center;
-  padding-left: 2.1em;
+  text-align: left;
+  padding-top: 50px;
+  justify-content: space-around;
+  width: fit-content;
 }
 .content {
-  height: 100%;
-  width: 69vw;
-
-  display: inline-block;
   padding-left: 20px;
   padding-right: 20px;
+  padding-bottom: 30px;
 }
 
 .editContainer {
-  height:100%;
-  width: 300px;
-
-  display: inline-block;
+  width: fit-content;
   padding-bottom: 30px;
-  padding-top: 20px ;
+  padding-top: 45px;
   text-align: right;
 }
+
+
 </style>

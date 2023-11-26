@@ -1,6 +1,10 @@
 <template>
-  <button :style="{ backgroundColor: color }" @click="handleClick">
-   <slot />
+  <button
+    type="button"
+    :style="{ backgroundColor: color }"
+    @click="handleClick"
+  >
+    <slot />
   </button>
 </template>
 
@@ -12,13 +16,11 @@ const props = defineProps({
   },
   task: {
     type: Object,
-    required: true,
+    required: false,
   },
 });
 
-const handleClick = () => {
-  // Emit a custom event if needed
-};
+const handleClick = () => {};
 </script>
 
 <style scoped>

@@ -31,8 +31,13 @@
           </p>
           
         </div>
-        <div class="dueDate">{{ remainingDays }} {{$t('daysLeft')}} | {{ formattedDate }} </div>
-
+        <div class="dueDate">
+          {{ remainingDays }} <span class="dueDate" v-if="remainingDays===1">{{ $t("day") }} </span><span class="dueDate" v-else>{{ $t("days") }}</span>
+        <ion-img class="clockImage"
+                src="../../../resources/clock_white.png"
+              ></ion-img>
+              {{ formattedDate }}
+      </div>
       </div>
 
       <!-- end card -->
@@ -80,8 +85,16 @@ h4 {
   position: relative;
   color: white;
   width: 300px;
-  padding: 5px;
+  padding: 5px 5px 5px 1px;
   text-align: right;
+}
+
+
+.clockImage{
+  margin-top:-3px;
+  display: inline-block;
+  width: 20px;
+  vertical-align: middle;
 }
 
 .content-card {

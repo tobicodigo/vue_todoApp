@@ -1,12 +1,13 @@
 <template>
-  <TaskDetailForm :task="task"></TaskDetailForm>
-  <CustomButton
-    v-if="route.name === 'edit'"
-    :task="task"
-    color="#FC7675"
-    @click="options.modelValue = true"
-    >{{ $t("deleteTask") }}</CustomButton
+  <TaskDetailForm :task="task" :mode="route.name">
+    <custom-button
+      v-if="route.name === 'edit'"
+      color="#FC7675"
+      @click="options.modelValue=true"
+      >{{ $t("deleteTask") }}</custom-button
+    ></TaskDetailForm
   >
+
   <VueFinalModal
     v-model="options.modelValue"
     :teleport-to="options.teleportTo"
@@ -31,21 +32,21 @@
       <h1 class="task-title text-xl">{{ task.title }}</h1>
     </span>
     <span id="cancelButton">
-      <CustomButton @click="options.modelValue = false" color="gray">{{
+      <custom-button @click="options.modelValue = false" color="gray">{{
         $t("cancel")
-      }}</CustomButton></span
+      }}</custom-button></span
     >
     <span id="deleteButton">
-      <CustomButton @click="deleteTask(task)" color="#FC7675">{{
+      <custom-button @click="deleteTask(task)" color="#FC7675">{{
         $t("confirmDelete2")
-      }}</CustomButton></span
+      }}</custom-button></span
     >
   </VueFinalModal>
 </template>
 
 <script setup>
 import TaskDetailForm from "../components/TaskDetailsForm.vue";
-import CustomButton from "../components/Button.vue";
+import CustomButton from "../components/CustomButton.vue";
 import { VueFinalModal } from "vue-final-modal";
 import { useStore } from "vuex";
 import { reactive, ref, watch } from "vue";
@@ -107,9 +108,9 @@ function deleteTask(taskToDelete) {
     }.bind(this),
     1000
   );
-  console.log(store.state.lastViewType)
+  console.log(store.state.lastViewType);
 
-  router.push("/" + store.state.lastViewType)
+  router.push("/" + store.state.lastViewType);
 }
 </script>
 
