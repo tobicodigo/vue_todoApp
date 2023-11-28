@@ -210,7 +210,7 @@ a:focus {
 }
 
 .card[data-color="var(--blue)"] .description {
-  color: #506568;
+  color: #163c42;
 }
 .card[data-color="var(--blue)"] .category {
   color: #506568;
@@ -222,11 +222,26 @@ a:focus {
   color: #c3f059;
 }
 
+.card[data-color="var(--brightgreen)"] .description {
+  color: #3c5500;
+}
+.card[data-color="var(--brightgreen)"] .category {
+  color: #598d0c;
+
+}
+
 .card[data-color="var(--orange)"] .description {
   color: #772510;
 }
 .card[data-color="var(--orange)"] .category {
-  color: #e95e37;
+  color: #d0502d;
+}
+
+.card[data-color="var(--purple)"] .description {
+  color: #772510;
+}
+.card[data-color="var(--purple)"] .category {
+  color: #772510;
 }
 
 .card[data-color="var(--pink)"] .description {

@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import { createI18n } from "vue-i18n";
 import messages from "../language/translations.js";
 
+
 const i18n = createI18n({
   locale: window.navigator.language,
   fallbackLocale: "en",
@@ -16,14 +17,27 @@ const store = createStore({
     },
     searchString : '',
     sortDirection: '',
+    filter: {},
+    savedFilter: {},
     lastViewType:'',
     tasks: [
+      {
+        id: 0,
+        title: "Test 0",
+        description: "This a test description",
+        type: 1,
+        color: 0,
+        createdDate: '2023-11-19',
+        dueDate: '2023-11-25',
+        assignee: "Cesc",
+        isDone: false,
+      },
       {
         id: 1,
         title: "Test 1",
         description: "This a test description",
         type: 1,
-        color: 4,
+        color: 1,
         createdDate: '2023-11-19',
         dueDate: '2023-11-25',
         assignee: "Cesc",
@@ -34,7 +48,7 @@ const store = createStore({
         title: "Test 2",
         description: "This a test description",
         type: 2,
-        color: 3,
+        color: 2,
         createdDate: '2023-11-19',
         dueDate: '2023-12-01',
         assignee: "Tobi",
@@ -45,7 +59,7 @@ const store = createStore({
         title: "Test 3",
         description: "This a test description",
         type: 3,
-        color: 2,
+        color: 3,
         createdDate: '2023-11-19',
         dueDate: '2023-12-25',
         assignee: "Javier",
@@ -56,7 +70,7 @@ const store = createStore({
         title: "Test 4",
         description: "This a test description",
         type: 4,
-        color: 1,
+        color: 4,
         createdDate: '2023-11-19',
         dueDate: '2023-11-25',
         assignee: "Lluis",
@@ -67,7 +81,7 @@ const store = createStore({
         title: "Test 5",
         description: "This a test description",
         type: 1,
-        color: 0,
+        color: 5,
         createdDate: '2023-11-19',
         dueDate: '2023-12-03',
         assignee: "Cesc",
@@ -78,7 +92,7 @@ const store = createStore({
         title: "Test 6",
         description: "This a test description",
         type: 2,
-        color: 1,
+        color: 6,
         createdDate: '2023-11-19',
         dueDate: '2023-11-30',
         assignee: "Tobi",
@@ -89,7 +103,7 @@ const store = createStore({
         title: "Test 7",
         description: "This a test description",
         type: 3,
-        color: 4,
+        color: 0,
         createdDate: '2023-11-19',
         dueDate: '2023-12-25',
         assignee: "Javier",
@@ -100,7 +114,7 @@ const store = createStore({
         title: "Test 8",
         description: "This a test description",
         type: 4,
-        color: 3,
+        color: 1,
         createdDate: '2023-11-19',
         dueDate: '2023-11-26',
         assignee: "Lluis",
@@ -114,9 +128,12 @@ const store = createStore({
       i18n.global.t("family"),
       i18n.global.t("private"),
     ],
-    colors: ["--yellow", "--blue", "--green", "--orange", "--pink"],
+    colors: ["--yellow", "--blue", "--green", "--brightgreen", "--orange", "--purple", "--pink"],
   },
   mutations: {},
+  actions: {
+  
+  }
 });
 
 export default store;

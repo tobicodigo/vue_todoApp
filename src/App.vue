@@ -21,8 +21,13 @@ import { computed } from "vue";
 import ToolBar from "./components/ToolBar.vue";
 import { useRoute } from "vue-router";
 import 'vue-final-modal/style.css'
-
 import { ModalsContainer } from 'vue-final-modal'
+import apiController from './api/api'
+
+const blabla=apiController.getTasks()
+console.log("TESTTTT")
+console.log(blabla)
+
 
 const route = useRoute();
 const { t } = useI18n();

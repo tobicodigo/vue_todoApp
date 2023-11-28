@@ -7,9 +7,11 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   --yellow: #F5E053;
-  --blue: #85AFD7;
-  --green: #86AF85;
+  --blue: #629bcf;
+  --green: #247e24;
+  --brightgreen: #91d14d;
   --orange: #ff8f5e;
+  --purple: #D8D8FF;
   --pink: #FF5BAE;
  
   /** primary **/

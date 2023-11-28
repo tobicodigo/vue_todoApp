@@ -17,6 +17,9 @@
       min="23.12.2023"
       required
     />
+    <label for="color-picker">{{ $t("pickColor") }}</label>
+    <color-picker id="color-picker" v-model="task.color"></color-picker>
+
     <label for="task-type">{{ $t("taskType") }}</label>
     <select id="task-type" v-model="task.type" required>
       <option value="" disabled>{{ $t("selectType") }}</option>
@@ -24,6 +27,7 @@
         {{ type }}
       </option>
     </select>
+    <hr>
     <custom-button type="submit" color="#458FF1">{{
       $t("saveTask")
     }}</custom-button>
@@ -33,9 +37,10 @@
 
 <script>
 import CustomButton from "../components/CustomButton.vue";
+import ColorPicker from "../components/ColorPicker.vue";
 
 export default {
-  components: { CustomButton },
+  components: { CustomButton,ColorPicker },
   props: {
     task: {
       type: Object,
@@ -63,8 +68,8 @@ export default {
           if (this.mode === "add") {
             this.$store.state.tasks.unshift(this.task);
           } else if (this.mode === "edit") {
-            const index = array.findIndex((task) => task.id === this.task.id);
-            this.store.state.tasks[index] = this.task;
+            const index =  this.$store.state.tasks.findIndex((task) => task.id === this.task.id);
+            this.$store.state.tasks[index] = this.task;
           }
         }.bind(this),
         1000
@@ -90,6 +95,9 @@ export default {
 </script>
 
 <style scoped>
+hr {
+  margin: 10px 0px 10px;
+}
 form {
   color: rgb(103, 103, 103);
   display: flex;

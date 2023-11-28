@@ -32,7 +32,7 @@
       <h1 class="task-title text-xl">{{ task.title }}</h1>
     </span>
     <span id="cancelButton">
-      <custom-button @click="options.modelValue = false" color="gray">{{
+      <custom-button @click="options.modelValue = false" color="#ACACAC">{{
         $t("cancel")
       }}</custom-button></span
     >
@@ -96,7 +96,7 @@ const options = reactive({
   swipeToClose: "none",
 });
 
-function deleteTask(taskToDelete) {
+const deleteTask = (taskToDelete) => {
   const index = store.state.tasks.findIndex(
     (key) => key.id === taskToDelete.id
   );
