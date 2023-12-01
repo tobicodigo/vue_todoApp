@@ -1,5 +1,5 @@
 <template>
-  <button
+  <button class="button"
     type="button"
     :style="{ backgroundColor: color }"
     @click="handleClick"
@@ -25,12 +25,20 @@ const handleClick = () => {};
 
 <style scoped>
 /* Add any button-specific styles here */
-button {
+.button {
   padding: 8px 36px;
   border: none;
   border-radius: 4px;
   color: white;
   cursor: pointer;
   outline: none;
+  transition-duration: 0.4s;
+
+}
+
+
+.button:hover {
+  
+  font-size: larger;
 }
 </style>

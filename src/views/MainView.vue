@@ -1,5 +1,7 @@
 <template>
+  <div>
   <list :viewType="route.name"></list>
+</div>
 </template>
 
 <script setup lang="ts">

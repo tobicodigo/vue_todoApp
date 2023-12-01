@@ -1,47 +1,49 @@
 <template>
-  <TaskDetailForm :task="task" :mode="route.name">
-    <custom-button
-      v-if="route.name === 'edit'"
-      color="#FC7675"
-      @click="options.modelValue=true"
-      >{{ $t("deleteTask") }}</custom-button
-    ></TaskDetailForm
-  >
+  <div>
+    <TaskDetailForm :task="task" :mode="route.name">
+      <custom-button
+        v-if="route.name === 'edit'"
+        color="#FC7675"
+        @click="options.modelValue = true"
+        >{{ $t("deleteTask") }}</custom-button
+      ></TaskDetailForm
+    >
 
-  <VueFinalModal
-    v-model="options.modelValue"
-    :teleport-to="options.teleportTo"
-    :display-directive="options.displayDirective"
-    :hide-overlay="options.hideOverlay"
-    :overlay-transition="options.overlayTransition"
-    :content-transition="options.contentTransition"
-    :click-to-close="options.clickToClose"
-    :esc-to-close="options.escToClose"
-    :background="options.background"
-    :lock-scroll="options.lockScroll"
-    :reserve-scroll-bar-gap="options.reserveScrollBarGap"
-    :swipe-to-close="options.swipeToClose"
-    class="flex justify-center items-center"
-    content-class="max-w-xl mx-4 p-4 bg-white dark:bg-gray-900 border dark:border-gray-700 rounded-lg space-y-2"
-  >
-    <h1 class="text-xl">{{ $t("deleteTask") }}</h1>
-    <p>
-      {{ $t("confirmDelete1") }}
-    </p>
-    <span class="title-span">
-      <h1 class="task-title text-xl">{{ task.title }}</h1>
-    </span>
-    <span id="cancelButton">
-      <custom-button @click="options.modelValue = false" color="#ACACAC">{{
-        $t("cancel")
-      }}</custom-button></span
+    <VueFinalModal
+      v-model="options.modelValue"
+      :teleport-to="options.teleportTo"
+      :display-directive="options.displayDirective"
+      :hide-overlay="options.hideOverlay"
+      :overlay-transition="options.overlayTransition"
+      :content-transition="options.contentTransition"
+      :click-to-close="options.clickToClose"
+      :esc-to-close="options.escToClose"
+      :background="options.background"
+      :lock-scroll="options.lockScroll"
+      :reserve-scroll-bar-gap="options.reserveScrollBarGap"
+      :swipe-to-close="options.swipeToClose"
+      class="flex justify-center items-center"
+      content-class="max-w-xl mx-4 p-4 bg-white dark:bg-gray-900 border dark:border-gray-700 rounded-lg space-y-2"
     >
-    <span id="deleteButton">
-      <custom-button @click="deleteTask(task)" color="#FC7675">{{
-        $t("confirmDelete2")
-      }}</custom-button></span
-    >
-  </VueFinalModal>
+      <h1 class="text-xl">{{ $t("deleteTask") }}</h1>
+      <p>
+        {{ $t("confirmDelete1") }}
+      </p>
+      <span class="title-span">
+        <h1 class="task-title text-xl">{{ task.title }}</h1>
+      </span>
+      <span id="cancelButton">
+        <custom-button @click="options.modelValue = false" color="#ACACAC">{{
+          $t("cancel")
+        }}</custom-button></span
+      >
+      <span id="deleteButton">
+        <custom-button @click="deleteTask(task)" color="#FC7675">{{
+          $t("confirmDelete2")
+        }}</custom-button></span
+      >
+    </VueFinalModal>
+  </div>
 </template>
 
 <script setup>
@@ -111,7 +113,7 @@ const deleteTask = (taskToDelete) => {
   console.log(store.state.lastViewType);
 
   router.push("/" + store.state.lastViewType);
-}
+};
 </script>
 
 <style scoped>

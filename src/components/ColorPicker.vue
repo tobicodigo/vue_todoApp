@@ -54,6 +54,13 @@ const handleChange = (value) => {
   margin-right: 10px;
   border: 1px solid #ccc;
   cursor: pointer;
+  transition-duration: 0.4s;
+
+}
+
+.color:hover {
+  border: 3px solid white;
+
 }
 
 .red {

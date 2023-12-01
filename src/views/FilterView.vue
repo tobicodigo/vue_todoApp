@@ -1,4 +1,4 @@
-<template>
+<template><div>
   <form class="form" @submit.prevent>
     <label for="task-date">{{ $t("filterStartDate") }}</label>
     <input type="date" id="task-date" v-model="filter.startDate" />
@@ -34,6 +34,7 @@
     }}</custom-button>
     <slot></slot>
   </form>
+</div>
 </template>
 
 <script setup>

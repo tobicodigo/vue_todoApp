@@ -41,11 +41,15 @@
             ><ion-button href="/add" fill="clear"
               ><ion-img src="../../../resources/add.png"></ion-img></ion-button
           ></router-link>
-          <router-link to="/register"
+          <router-link to="/login"
             ><ion-button fill="clear"
-              ><ion-img
+              ><ion-img v-if="store.state.user.photo.length<=1"
                 src="../../../resources/profile.png"
-              ></ion-img></ion-button
+              ></ion-img>
+              <ion-img class="profile" v-else
+              :src="'data:image/jpeg;base64,'+store.state.user.photo"
+              ></ion-img>
+              </ion-button
           ></router-link>
         </ion-col>
       </ion-row>
@@ -100,5 +104,12 @@ ion-col {
 
 ion-img {
   width: 3vh;
+}
+
+.profile {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 35px;
+  height: 35px;
 }
 </style>

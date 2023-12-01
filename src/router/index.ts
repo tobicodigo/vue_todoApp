@@ -5,6 +5,8 @@ import ProfileView from "../views/ProfileView.vue";
 import FilterView from "../views/FilterView.vue";
 import TaskDetailsView from "../views/TaskDetailsView.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import PasswordResetView from "../views/PasswordResetView.vue"
+import LoginView from "@/views/LoginView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -45,6 +47,16 @@ const routes: Array<RouteRecordRaw> = [
     path: "/register",
     name: "register",
     component: RegisterView,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
+  },
+  {
+    path: "/password",
+    name: "password",
+    component: PasswordResetView,
   },
   { path: '/:pathMatch(.*)*', name: 'home', component: MainView },
 

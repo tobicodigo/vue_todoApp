@@ -12,8 +12,12 @@ const i18n = createI18n({
 const store = createStore({
   state: {
     user: {
+      userid: Number,
       name: String,
       email: String,
+      password: String,
+      photo: String,
+      loggedIn: false,
     },
     searchString : '',
     sortDirection: '',
