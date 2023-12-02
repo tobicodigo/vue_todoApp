@@ -53,9 +53,7 @@ const filter = ref({})
 
 onMounted(() => {
   store.state.filter={}
-  console.log("!!")
   if(Object.keys(store.state.savedFilter).length>0) {
-    console.log("!!!!!")
 
   filter.value = store.state.savedFilter
   }
@@ -65,7 +63,6 @@ onMounted(() => {
 const applyFilter = () => {
   setTimeout(
     function () {
-      console.log("apply");
       store.state.savedFilter = filter.value
       store.state.filter = store.state.savedFilter;
       filter.value={}
@@ -80,8 +77,7 @@ const resetFilter = () => {
   store.state.filter={}
   store.state.savedFilter={}
   filter.value={}
-  //store.state.savedFilter = filter;
-  //store.state.filter = filter;
+
 
 };
 </script>
@@ -90,17 +86,7 @@ const resetFilter = () => {
 hr {
   margin: 10px 0px 10px;
 }
-form {
-  color: rgb(103, 103, 103);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 3rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+
 title {
   font-size: 2rem;
   font-weight: bold;

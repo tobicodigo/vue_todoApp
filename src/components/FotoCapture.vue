@@ -2,13 +2,12 @@
       <label for="photo">{{ $t("picture") }}</label>
       <img id="profile" :src="imageUrl" alt="Foto de perfil" />
       <input type="file" id="photo" v-on:change="onFileChanged" style="display: none;" />
-<input type="button" value="Browse..." onclick="document.getElementById('photo').click();" />
+<input type="button" :value="$t('browseFoto')" onclick="document.getElementById('photo').click();" />
  
 </template>
 
 <script setup>
 import {ref} from "vue"
-const props = defineProps("user");
 
 const imageUrl = ref('resources/profile_animated.gif');
 

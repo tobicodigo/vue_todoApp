@@ -123,7 +123,7 @@ const messages = {
     days:"Tage",
     pickColor: "Farbe auswählen",
     taskName: "Titel der Aufgabe",
-    taskDescription: "Beschreibgung",
+    taskDescription: "Beschreibung",
     taskDate: "Zu erledigen bis",
     taskAssignee : "Zugewiesen an",
     taskType : "Kategorie",

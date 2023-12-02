@@ -52,10 +52,10 @@
 
     <div v-else class="form registered">
       <span
-        >Hola {{ user.name
+        >Hola {{ $store.state.user.name
         }}<img
           class="confetti"
-          src="resources/confetti.gif"
+          :src="'resources/confetti.gif'"
           alt="Foto de perfil"
       /></span>
 
@@ -131,17 +131,7 @@ h2 {
   font-size: large;
   padding: 10px;
 }
-.form {
-  color: rgb(103, 103, 103);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 3rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+
 title {
   font-size: 2rem;
   font-weight: bold;

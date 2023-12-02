@@ -25,7 +25,7 @@ const store = useStore();
 const props = defineProps({
   modelValue: Number,
 });
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const selectedOption = ref(props.modelValue);
 
@@ -36,7 +36,7 @@ const isChecked = (value) => {
 
 const handleChange = (value) => {
   selectedOption.value = value;
-  emit('update:modelValue', selectedOption.value);
+  emit("update:modelValue", selectedOption.value);
 };
 </script>
 
@@ -55,12 +55,10 @@ const handleChange = (value) => {
   border: 1px solid #ccc;
   cursor: pointer;
   transition-duration: 0.4s;
-
 }
 
 .color:hover {
-  border: 3px solid white;
-
+  box-shadow: 0 8px 6px -6px black, inset 0 0 0 1px #fff;
 }
 
 .red {

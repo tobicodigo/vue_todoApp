@@ -21,4 +21,9 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+ion-searchbar {
+  min-width: max-content;
+}
+
+</style>

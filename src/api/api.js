@@ -1,7 +1,7 @@
 import { CapacitorHttp } from "@capacitor/core";
 
 const apiController = {
-  url: "https://lasalle.tob-apps.com/todoApp/api/",
+  url: "https://duetogether.online/api/",
 
   getTasks: async function () {
     const options = {
@@ -13,7 +13,6 @@ const apiController = {
 
     const response = await CapacitorHttp.get(options);
     const object = JSON.parse(response.data);
-    console.log(response);
     const array = object.result;
     return object;
   },
@@ -30,7 +29,6 @@ const apiController = {
   
     const response = await CapacitorHttp.post(options);
     const object = JSON.parse(response.data);
-    console.log(response);
     const array = object.result;
     return object;
   },
@@ -47,7 +45,6 @@ const apiController = {
   
     const response = await CapacitorHttp.post(options);
     const object = JSON.parse(response.data);
-    console.log(response);
     const array = object.result;
     return object;
   },
@@ -63,7 +60,6 @@ const apiController = {
   
     const response = await CapacitorHttp.post(options);
     const object = JSON.parse(response.data);
-    console.log(response);
     const array = object.result;
     return object;
   },
@@ -79,7 +75,6 @@ const apiController = {
     };
   
     const response = await CapacitorHttp.post(options);
-    console.log(response.data)
     const object = JSON.parse(response.data);
     return object;
   },

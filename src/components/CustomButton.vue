@@ -33,12 +33,15 @@ const handleClick = () => {};
   cursor: pointer;
   outline: none;
   transition-duration: 0.4s;
+  font-size: 15px;
 
 }
 
 
 .button:hover {
-  
-  font-size: larger;
+  box-shadow: 0 0 0 2px #d0d0d0,
+                inset 0 0 0 1px #fff;
+              font-weight: bold;
+              
 }
 </style>

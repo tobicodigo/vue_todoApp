@@ -134,7 +134,7 @@ ul {
 }
 
 .noEntries {
-  background-image: url("../resources/speechbubble.png");
+  background-image: url("../speechbubble.png");
   background-repeat: no-repeat, repeat;
   color: #828282;
   width: 250px;

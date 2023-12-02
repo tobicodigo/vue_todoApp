@@ -3,7 +3,7 @@
     <ion-page>
       <ModalsContainer />
 
-      <ion-header :translucent="true">
+      <ion-header>
         <tool-bar :viewType="route.name" :heading="heading"></tool-bar>
       </ion-header>
 
@@ -55,7 +55,50 @@ const heading = computed(() => {
 .slide-out-to-top-leave-active {
   transition: all 0.5s ease-in;
 }
-.slide-out-to-top-enter, .slide-out-to-top-leave-to {
+.slide-out-to-top-enter,
+.slide-out-to-top-leave-to {
   opacity: 0;
 }
+</style>
+
+<style>
+.form {
+  color: rgb(103, 103, 103);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0px auto;
+  padding: 2rem;
+  border: none;
+    box-shadow: none;
+}
+
+ion-content,
+ion-page,
+ion-toolbar,
+input,
+textarea,
+select {
+  --background: transparent;
+  background-color: white;
+}
+
+input,select,textarea {
+    border-color: 1px solid gainsboro;
+  }
+
+@media screen and (min-width: 579px)  {
+  .form {
+    margin: 50px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
+  }
+  input,select,textarea {
+    border:none;
+  }
+}
+
+
 </style>
