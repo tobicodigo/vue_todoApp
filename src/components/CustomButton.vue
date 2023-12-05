@@ -44,4 +44,11 @@ const handleClick = () => {};
               font-weight: bold;
               
 }
+
+@media screen and (max-width: 579px) {
+  .button {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+}
 </style>

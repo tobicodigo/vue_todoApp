@@ -17,6 +17,50 @@ const apiController = {
     return object;
   },
 
+  getSecurityQuestion: async function (forEmail) {
+    const options = {
+      url: this.url,
+      headers: {
+        Accept: "*",
+      },
+      data: { method: 'getSecurityQuestion', email: forEmail },
+    };
+
+    const response = await CapacitorHttp.post(options);
+    const object = JSON.parse(response.data);
+    const array = object.result;
+    return object;
+  },
+
+  checkSecurityAnswer: async function (forEmail,forQuestion,forAnswer) {
+    const options = {
+      url: this.url,
+      headers: {
+        Accept: "*",
+      },
+      data: { method: 'checkSecurityAnswer', email: forEmail, question: forQuestion, answer: forAnswer },
+    };
+
+    const response = await CapacitorHttp.post(options);
+    const object = JSON.parse(response.data);
+    const array = object.result;
+    return object;
+  },
+
+  updatePassword: async function (forUser) {
+    const options = {
+      url: this.url,
+      headers: {
+        Accept: "*",
+      },
+      data: { method: 'updatePassword', user: forUser },
+    };
+
+    const response = await CapacitorHttp.post(options);
+    const object = JSON.parse(response.data);
+    const array = object.result;
+    return object;
+  },
 
   createTask: async function () {
     const options = {

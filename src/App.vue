@@ -44,6 +44,8 @@ const heading = computed(() => {
 </script>
 
 <style scoped>
+
+
 .content {
   height: 300px;
   overflow-y: scroll;
@@ -59,6 +61,7 @@ const heading = computed(() => {
 .slide-out-to-top-leave-to {
   opacity: 0;
 }
+
 </style>
 
 <style>
@@ -87,6 +90,12 @@ select {
 input,select,textarea {
     border-color: 1px solid gainsboro;
   }
+
+  .confetti {
+  width: 50px;
+  display: inline-block;
+  padding-left: 20px;
+}
 
 @media screen and (min-width: 579px)  {
   .form {

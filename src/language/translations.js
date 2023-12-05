@@ -50,6 +50,15 @@ const messages = {
     startAddTask:"Start and add task",
     forgotPassword:"Forgot your password?",
     registerProfile:"No login yet? Register here",
+    passwordQuestionAndAnswerRequired:"Security question and answer is required",
+    passwordQuestion:"Security question to reset password",
+    passwordAnswer:"Answer",
+    passwordResetDone:"Password has been successfully updated",
+    answerNotCorrect:"Answer is not correct",
+    recoverPassword: "Reset password",
+    setNewPassword:"Set new password",
+    checkAnswer:"Check answer",
+    newPassword:"New password",
 
   },
   es: {
@@ -103,7 +112,15 @@ const messages = {
     startAddTask:"Iniciar y añadir tarea",
     forgotPassword:"¿Ha olvidado su contraseña? Recuperar aquí",
     registerProfile:"¿Aún no se ha identificado? Regístrese aquí",
-
+    passwordQuestionAndAnswerRequired:"Se requiere pregunta y respuesta de seguridad",
+    passwordQuestion:"Pregunta de seguridad para restablecer la contraseña",
+    passwordAnswer:"Respuesta",
+    passwordResetDone:"La contraseña ha sido actualizada correctamente",
+    answerNotCorrect:"La respuesta no es correcta",
+    recoverPassword: "Restablecer contraseña",
+    setNewPassword:"Establecer nueva contraseña",
+    checkAnswer:"Comprobar respuesta",
+    newPassword:"Nueva contraseña",
   },
   de: {
     home: "Meine ToDo",
@@ -156,6 +173,15 @@ const messages = {
     startAddTask:"Beginnen und Aufgabe hinzufügen",
     forgotPassword:"Passwort vergessen?",
     registerProfile:"Noch keinen Login? Zur Registrierung",
+    passwordQuestionAndAnswerRequired:"Sicherheitsfrage und Antwort sind erforderlich",
+    passwordQuestion:"Sicherheitsfrage zum Passwort zurücksetzen",
+    passwordAnswer:"Antwort",
+    passwordResetDone:"Das Passwort wurde erfolgreich aktualisiert",
+    answerNotCorrect:"Die Antwort ist nicht korrekt",
+    recoverPassword: "Passwort zurücksetzen",
+    setNewPassword:"Neues Passwort festlegen",
+    checkAnswer:"Antwort überprüfen",
+    newPassword:"Neues Passwort",
   },
 };
 

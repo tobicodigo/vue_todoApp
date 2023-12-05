@@ -26,4 +26,8 @@ ion-searchbar {
   min-width: max-content;
 }
 
+@media screen and (max-width: 579px) {
+
+}
+
 </style>

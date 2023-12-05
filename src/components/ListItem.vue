@@ -118,13 +118,15 @@ li {
   background-color: rgb(255, 255, 255);
   border: 1px solid #f6f2f2;
 }
+
 .toggleContainer {
   background-color: white;
   text-align: left;
   padding-top: 50px;
   justify-content: space-around;
-  width: fit-content;
+  min-width: 100px;
 }
+
 .content {
   padding-left: 20px;
   padding-right: 20px;
@@ -132,11 +134,32 @@ li {
 }
 
 .editContainer {
-  width: fit-content;
   padding-bottom: 30px;
   padding-top: 45px;
   text-align: right;
+  min-width: 300px;
+
 }
 
+
+@media screen and (max-width: 750px)  {
+  .toggleContainer {
+width: 100%;
+text-align: right;
+padding: 20px 0px 0px 0px;
+}
+
+.content {
+  width: 100%;
+  padding: 0px 30px 0px 30px;
+}
+
+.editContainer {
+  width: 100%;
+text-align: right;
+padding: 30px 10px 30px 0px;
+}
+
+}
 
 </style>

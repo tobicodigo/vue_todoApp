@@ -8,7 +8,7 @@
         <ion-col>
           <search-bar></search-bar>
         </ion-col>
-        <ion-col>
+        <ion-col id="#menu">
           <router-link v-if="props.viewType != 'card'" to="/card">
             <ion-button fill="clear"
               ><ion-img src="resources/cards.png"></ion-img></ion-button
@@ -83,8 +83,11 @@ function changeDirection() {
 <style scoped>
 ion-title {
   font-size: 25px;
-  min-width: 200px;
-  color: #bcd8fe;
+  min-width: 300px;
+  color: #f6c0c0bc;
+  text-align: left;
+  justify-self: left;
+  padding-inline: 10px;
 }
 
 ion-col {
@@ -98,7 +101,7 @@ ion-col {
 }
 
 ion-img {
-  width: 3vh;
+  width: 28px;
 }
 
 .profile {
@@ -108,15 +111,13 @@ ion-img {
   height: 35px;
 }
 
-
-
-@media screen and (min-width: 579px)  {
+@media screen and (min-width: 579px) {
   ion-title {
-  font-size: 3vw;
-  font-size: max(35px, min(3vw, 100px));
-  font-size: clamp(35px, 3vw, 100px);
-  width: fit-content;
-  color: #bcd8fe;
-}
+    font-size: 3vw;
+    font-size: max(35px, min(3vw, 100px));
+    font-size: clamp(35px, 3vw, 100px);
+    width: fit-content;
+    color: #f6c0c0bc;
+  }
 }
 </style>

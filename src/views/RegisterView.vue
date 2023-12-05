@@ -16,6 +16,10 @@
       <div class="error" v-if="submitResult.description === 1062">
         {{ $t("profileExists") }}
       </div>
+      <label for="name">{{ $t("name") }}</label>
+      <input type="text" id="name" v-model="user.name" required />
+      <foto-capture @on-selected="(i) => (user.photo = i)"></foto-capture>
+      <hr>
       <label for="password">{{ $t("password") }}</label>
       <input type="password" id="password" v-model="user.password" required />
       <div class="error" v-if="user.password && !isValidPassword">
@@ -29,8 +33,6 @@
         required
       />
 
-      {{ submitResult.description }}
-
       <div
         class="error"
         v-if="
@@ -40,10 +42,25 @@
         {{ $t("passwordSimilarity") }}
       </div>
 
-      <label for="name">{{ $t("name") }}</label>
-      <input type="text" id="name" v-model="user.name" required />
+  
 
-      <foto-capture @on-selected="(i) => (user.photo = i)"></foto-capture>
+      <label for="question">{{ $t("passwordQuestion") }}</label>
+      <input
+        type="text"
+        id="question"
+        v-model="user.question"
+        required
+      />
+
+      <label for="answer">{{ $t("passwordAnswer") }}</label>
+      <input
+        type="text"
+        id="answer"
+        v-model="user.answer"
+        required
+      />
+
+     
       <hr />
       <custom-button type="submit" color="#458FF1">{{
         $t("sendRegistration")
@@ -55,9 +72,9 @@
         >Hola {{ $store.state.user.name
         }}<img
           class="confetti"
-          :src="'resources/confetti.gif'"
+          src="resources/confetti.gif"
           alt="Foto de perfil"
-      /></span>
+        /></span>
 
       <img
         v-if="$store.state.user.photo"
@@ -75,6 +92,7 @@
   </div>
 </template>
 
+
 <script>
 import CustomButton from "../components/CustomButton.vue";
 import FotoCapture from "../components/FotoCapture.vue";
@@ -90,6 +108,8 @@ export default {
         email: "",
         password: "",
         name: "",
+        question: "",
+        answer: "",
         photo: "",
       },
     };
@@ -103,6 +123,7 @@ export default {
   methods: {
     submitForm() {
       console.log("submit" + this.user);
+
       if (this.isValidPassword && this.user.password === this.confirmPassword) {
         const sendRegistration = async () => {
           const data = await ApiController.createUser(this.user);
@@ -112,8 +133,6 @@ export default {
             this.user.loggedIn = true;
             this.$store.state.user = this.user;
           }
-
-          return data;
         };
         sendRegistration();
       }
@@ -131,7 +150,17 @@ h2 {
   font-size: large;
   padding: 10px;
 }
-
+.form {
+  color: rgb(103, 103, 103);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 title {
   font-size: 2rem;
   font-weight: bold;
@@ -163,11 +192,6 @@ input {
   margin: 20px auto;
 }
 
-.confetti {
-  width: 50px;
-  display: inline-block;
-  padding-left: 20px;
-}
 
 .error {
   color: rgb(244, 143, 143);

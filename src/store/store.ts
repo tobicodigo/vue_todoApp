@@ -15,6 +15,8 @@ const store = createStore({
       userid: Number,
       name: String,
       email: String,
+      question: String,
+      answer: String,
       password: String,
       photo: String,
       loggedIn: false,
@@ -27,8 +29,8 @@ const store = createStore({
     tasks: [
       {
         id: 0,
-        title: "Test 0",
-        description: "This a test description",
+        title: "Urgent",
+        description: "Salad, Ketchup, Meat",
         type: 1,
         color: 0,
         createdDate: '2023-11-19',
@@ -56,7 +58,7 @@ const store = createStore({
         createdDate: '2023-11-19',
         dueDate: '2023-12-01',
         assignee: "Tobi",
-        isDone: true,
+        isDone: false,
       },
       {
         id: 3,
@@ -67,7 +69,7 @@ const store = createStore({
         createdDate: '2023-11-19',
         dueDate: '2023-12-25',
         assignee: "Javier",
-        isDone: true,
+        isDone: false,
       },
       {
         id: 4,
