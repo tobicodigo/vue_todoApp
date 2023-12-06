@@ -36,7 +36,7 @@
             ><ion-button href="/add" fill="clear"
               ><ion-img src="resources/add.png"></ion-img></ion-button
           ></router-link>
-          <router-link to="/login"
+          <router-link :to="profilePath"
             ><ion-button fill="clear"
               ><ion-img
                 v-if="store.state.user.photo.length <= 1"
@@ -66,6 +66,7 @@ import {
 } from "@ionic/vue";
 import SearchBar from "./Searchbar.vue";
 import { useStore } from "vuex";
+import { computed } from "vue"
 const store = useStore();
 const props = defineProps(["viewType", "heading"]);
 
@@ -78,6 +79,14 @@ function changeDirection() {
     store.state.sortDirection = "up";
   }
 }
+
+const profilePath = computed(() => {
+  if (store.state.user.loggedIn) {
+    return '/profile';
+  } 
+  return '/login';
+});
+
 </script>
 
 <style scoped>

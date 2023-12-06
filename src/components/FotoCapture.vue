@@ -7,11 +7,18 @@
 </template>
 
 <script setup>
-import {ref} from "vue"
+import {ref,onMounted} from "vue"
 
+const props = defineProps(["base64"]);
 const imageUrl = ref('resources/profile_animated.gif');
 
 const emit = defineEmits(['on-selected']);
+
+onMounted(() => {
+  if(props.base64) {
+    imageUrl.value='data:image/jpeg;base64,'+props.base64
+  }
+});
 
 
 const onFileChanged = (event) => {

@@ -12,7 +12,7 @@ const i18n = createI18n({
 const store = createStore({
   state: {
     user: {
-      userid: Number,
+      id: Number,
       name: String,
       email: String,
       question: String,
@@ -26,6 +26,7 @@ const store = createStore({
     filter: {},
     savedFilter: {},
     lastViewType:'',
+    profileRecentlyUpdated:false,
     tasks: [
       {
         id: 0,

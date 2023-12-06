@@ -7,6 +7,8 @@ import TaskDetailsView from "../views/TaskDetailsView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import PasswordResetView from "../views/PasswordResetView.vue"
 import LoginView from "@/views/LoginView.vue";
+import EditProfileView from "@/views/EditProfileView.vue";
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,6 +44,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/profile",
     name: "profile",
     component: ProfileView,
+  },
+  {
+    path: "/editprofile",
+    name: "editProfile",
+    component: EditProfileView,
   },
   {
     path: "/register",

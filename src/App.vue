@@ -29,8 +29,6 @@ import { ModalsContainer } from "vue-final-modal";
 import ApiController from "./api/api";
 
 ApiController.getTasks();
-ApiController.editTask();
-ApiController.deleteTask();
 
 const route = useRoute();
 const { t } = useI18n();
@@ -95,6 +93,16 @@ input,select,textarea {
   width: 50px;
   display: inline-block;
   padding-left: 20px;
+}
+
+.centered {
+  text-align: center;
+  font-size: xx-large;
+}
+
+.smallButton {
+  width: 230px;
+  margin: 10px;
 }
 
 @media screen and (min-width: 579px)  {

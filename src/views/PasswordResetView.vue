@@ -5,46 +5,60 @@
       class="form"
       @submit.prevent="setNewPassword"
     >
-        <label for="email" v-if="!emailIsOk">{{ $t("email") }}</label>
-        <input v-if="!emailIsOk"
-          type="email"
-          id="email"
-          v-model="user.email"
-          required
-          autocomplete
-        />
+      <span id="loginLink"
+        ><router-link to="/login">{{ $t("loginProfile") }}</router-link></span
+      >
+      <label for="email" v-if="!emailIsOk">{{ $t("email") }}</label>
+      <input
+        v-if="!emailIsOk"
+        type="email"
+        id="email"
+        v-model="user.email"
+        required
+        autocomplete
+      />
 
-        <custom-button v-if="!emailIsOk" @click="checkEmail" color="#458FF1">{{
-          $t("recoverPassword")
-        }}</custom-button>
+      <custom-button v-if="!emailIsOk" @click="checkEmail" color="#458FF1">{{
+        $t("recoverPassword")
+      }}</custom-button>
 
-        <label v-if="emailIsOk && !answerIsOk" for="question">{{ $t("passwordQuestion") }}</label>
-        <input v-if="emailIsOk && !answerIsOk"
-          type="text"
-          id="question"
-          v-model="user.question"
-          required
-          autocomplete="off"
-          readonly
-        />
+      <label v-if="emailIsOk && !answerIsOk" for="question">{{
+        $t("passwordQuestion")
+      }}</label>
+      <input
+        v-if="emailIsOk && !answerIsOk"
+        type="text"
+        id="question"
+        v-model="user.question"
+        required
+        autocomplete="off"
+        readonly
+      />
 
-        <label v-if="emailIsOk && !answerIsOk" for="answer">{{ $t("passwordAnswer") }}</label>
-        <input v-if="emailIsOk && !answerIsOk"
-          type="text"
-          id="answer"
-          v-model="user.answer"
-          required
-          autocomplete="off"
-        />
-        <div class="error" v-if="submitResult.description === 'answer incorrect'">
+      <label v-if="emailIsOk && !answerIsOk" for="answer">{{
+        $t("passwordAnswer")
+      }}</label>
+      <input
+        v-if="emailIsOk && !answerIsOk"
+        type="text"
+        id="answer"
+        v-model="user.answer"
+        required
+        autocomplete="off"
+      />
+      <div class="error" v-if="submitResult.description === 'answer incorrect'">
         {{ $t("answerNotCorrect") }}
       </div>
-        <custom-button v-if="emailIsOk && !answerIsOk" @click="checkAnswer" color="#458FF1">{{
-       $t("checkAnswer")
-        }}</custom-button>
+      <custom-button
+        v-if="emailIsOk && !answerIsOk"
+        @click="checkAnswer"
+        color="#458FF1"
+        >{{ $t("checkAnswer") }}</custom-button
+      >
 
       <label v-if="answerIsOk" for="password">{{ $t("newPassword") }}</label>
-      <input v-if="answerIsOk"
+      <input
+        v-if="answerIsOk"
         type="password"
         id="password"
         v-model="user.password"
@@ -54,8 +68,11 @@
       <div class="error" v-if="user.password && !isValidPassword">
         {{ $t("passwordStrength") }}
       </div>
-      <label v-if="answerIsOk" for="confirmPassword">{{ $t("confirmPassword") }}</label>
-      <input v-if="answerIsOk"
+      <label v-if="answerIsOk" for="confirmPassword">{{
+        $t("confirmPassword")
+      }}</label>
+      <input
+        v-if="answerIsOk"
         type="password"
         id="confirmPassword"
         v-model="confirmPassword"
@@ -79,13 +96,10 @@
     </form>
 
     <div v-else class="form success">
-      
-      <span>{{ $t("passwordResetDone") }}<img
-          class="confetti"
-          src="resources/confetti.gif"
-          alt="confetti"
-        /></span>
-      
+      <span
+        >{{ $t("passwordResetDone")
+        }}<img class="confetti" :src="'resources/confetti.gif'" alt="confetti"
+      /></span>
     </div>
   </div>
 </template>
@@ -101,7 +115,7 @@ export default {
       emailIsOk: false,
       answerIsOk: false,
       confirmPassword: "",
-      submitResult : {},
+      submitResult: {},
       user: {
         email: "",
         question: "",
@@ -124,46 +138,45 @@ export default {
 
         if (this.submitResult.message === "Question found") {
           this.user.question = this.submitResult.question;
-          this.emailIsOk=true;
+          this.emailIsOk = true;
         }
       };
 
       getSecurityQuestion();
-
     },
     checkAnswer() {
       const checkSecurityAnswer = async () => {
-        const data = await ApiController.checkSecurityAnswer(this.user.email,this.user.question,this.user.answer);
+        const data = await ApiController.checkSecurityAnswer(
+          this.user.email,
+          this.user.question,
+          this.user.answer
+        );
         this.submitResult = data;
 
         if (this.submitResult.message === "Answer correct") {
-          this.answerIsOk=true;
-          this.user.id= this.submitResult.user.id
-          this.user.name= this.submitResult.user.name
-
-        } 
+          this.answerIsOk = true;
+          this.user.id = this.submitResult.user.id;
+          this.user.name = this.submitResult.user.name;
+        }
       };
 
       checkSecurityAnswer();
-
     },
 
     setNewPassword() {
-
       const updatePassword = async () => {
         const data = await ApiController.updatePassword(this.user);
         this.submitResult = data;
 
         if (this.submitResult.message === "Password updated") {
           this.$store.state.user.password = this.user.password;
-          
-          setTimeout(
-        function () {
-          this.$router.push("/login");
-        }.bind(this),
-        3000
-      );
 
+          setTimeout(
+            function () {
+              this.$router.push("/login");
+            }.bind(this),
+            3000
+          );
         }
       };
 
@@ -174,6 +187,12 @@ export default {
 </script>
 
 <style scoped>
+#loginLink {
+  text-align: right;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
 hr {
   margin: 10px 0px 10px;
 }
@@ -182,17 +201,7 @@ h2 {
   font-size: large;
   padding: 10px;
 }
-.form {
-  color: rgb(103, 103, 103);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 3rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+
 title {
   font-size: 2rem;
   font-weight: bold;
