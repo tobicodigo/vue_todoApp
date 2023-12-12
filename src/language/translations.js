@@ -71,6 +71,7 @@ const messages = {
     profileActions: "What do you want to do?",
     updateProfile: "Update Profile",
     logout:"Logout",
+    showMyTasks:"Show my tasks",
   },
   es: {
     home: "Mis Tareas",
@@ -145,6 +146,8 @@ const messages = {
     profileActions: "¿Qué quieres hacer?",
     updateProfile: "Actualizar perfil",
     logout:"Logout",
+    showMyTasks:"Ver mis tareas",
+
   },
   de: {
     home: "Meine ToDo",
@@ -219,6 +222,7 @@ const messages = {
     profileActions: "Was möchtest du machen?",
     updateProfile:"Profil aktualisieren",
     logout:"Logout",
+    showMyTasks:"Meine Aufgaben anzeigen",
 
   },
 };

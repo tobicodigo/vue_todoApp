@@ -27,7 +27,6 @@ const onFileChanged = (event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       imageUrl.value = e.target.result;
-     // console.log(imageUrl.value)
       const base64Data = imageUrl.value.split(",")[1];
       emit('on-selected', base64Data);
     };

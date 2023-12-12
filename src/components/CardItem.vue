@@ -9,11 +9,10 @@
         :style="{ backgroundColor: activeColor }"
       >
         <div class="cardHeader">
-          
           <toggle
             :checked="task.isDone"
             :checkmark="false"
-            @setDone="(i) => (task.isDone = i)"
+            @setDone="(i) => (updateTask(i))"
           ></toggle>
           <router-link :to="'/edit/task/' + task.id">
             <ion-img
@@ -29,15 +28,18 @@
           <p class="description">
             {{ task.description }}
           </p>
-          
         </div>
         <div class="dueDate">
-          {{ remainingDays }} <span class="dueDate" v-if="remainingDays===1">{{ $t("day") }} </span><span class="dueDate" v-else>{{ $t("days") }}</span>
-        <ion-img class="clockImage"
-                src="../../../resources/clock_white.png"
-              ></ion-img>
-              {{ formattedDate }}
-      </div>
+          {{ remainingDays }}
+          <span class="dueDate" v-if="remainingDays === 1"
+            >{{ $t("day") }} </span
+          ><span class="dueDate" v-else>{{ $t("days") }}</span>
+          <ion-img
+            class="clockImage"
+            src="../../../resources/clock_white.png"
+          ></ion-img>
+          {{ formattedDate }}
+        </div>
       </div>
 
       <!-- end card -->
@@ -51,25 +53,36 @@ import { ref } from "vue";
 import toggle from "./Toggle.vue";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
+import ApiController from "../api/api";
+
 const i18n = useI18n();
 const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
-
+const submitResult = ref()
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 
-const dueDateTimeStamp = new Date(task.dueDate).getTime()
-const difference = Math.abs(dueDateTimeStamp - (Date.now()));
+const dueDateTimeStamp = new Date(task.dueDate).getTime();
+const difference = Math.abs(dueDateTimeStamp - Date.now());
 const remainingDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
-const formattedDate = new Date(task.dueDate).toLocaleDateString(i18n.locale.value);
+const formattedDate = new Date(task.dueDate).toLocaleDateString(
+  i18n.locale.value
+);
+const updateTask = async (i) => {
+  task.isDone = i;
 
+  const data = await ApiController.updateTask(task);
+  submitResult.value = data;
+
+  if (submitResult.value.message === "Task updated") {
+  }
+};
 </script>
 
 <style scoped>
-
 h4 {
-  font-size:x-large;
+  font-size: x-large;
   font-weight: bold;
   padding-bottom: 15px;
   padding-top: 20px;
@@ -89,9 +102,8 @@ h4 {
   text-align: right;
 }
 
-
-.clockImage{
-  margin-top:-3px;
+.clockImage {
+  margin-top: -3px;
   display: inline-block;
   width: 20px;
   vertical-align: middle;
@@ -227,7 +239,6 @@ a:focus {
 }
 .card[data-color="var(--brightgreen)"] .category {
   color: #598d0c;
-
 }
 
 .card[data-color="var(--orange)"] .description {

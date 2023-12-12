@@ -46,6 +46,13 @@
     </form>
 
     <welcome-box v-else showAddbutton="true" :title="$t('thanksForLogin')">
+      <div class="centered">
+        <router-link to="/home"
+          ><custom-button class="smallButton" color="#458FF1">{{
+            $t("showMyTasks")
+          }}</custom-button></router-link
+        >
+      </div>
     </welcome-box>
   </div>
 </template>
@@ -68,14 +75,11 @@ const login = async () => {
 
   if (submitResult.value.message === "Login succesfull") {
     loginIsOk.value = true;
-    store.state.user = submitResult.value.user;
   }
 };
 </script>
 
 <style scoped>
-
-
 #registerLink {
   text-align: right;
   padding-top: 0px;
@@ -110,6 +114,4 @@ input {
 .error {
   color: rgb(244, 143, 143);
 }
-
-
 </style>

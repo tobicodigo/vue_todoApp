@@ -52,11 +52,13 @@ import CustomButton from "../components/CustomButton.vue";
 import { VueFinalModal } from "vue-final-modal";
 import { useStore } from "vuex";
 import { reactive, ref, watch } from "vue";
+import ApiController from "../api/api";
+
 const store = useStore();
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
-
+const submitResult = ref();
 const task = ref(
   store.state.tasks.filter(function (arr) {
     return arr.id == route.params.id;
@@ -99,6 +101,16 @@ const options = reactive({
 });
 
 const deleteTask = (taskToDelete) => {
+  if (store.state.user.loggedIn) {
+    const sendDeleteTask = async () => {
+      const data = await ApiController.deleteTask(task.value);
+      submitResult.value = data;
+
+      if (submitResult.value.message === "Task deleted") {
+      }
+    };
+    sendDeleteTask();
+  }
   const index = store.state.tasks.findIndex(
     (key) => key.id === taskToDelete.id
   );
@@ -110,7 +122,6 @@ const deleteTask = (taskToDelete) => {
     }.bind(this),
     1000
   );
-  console.log(store.state.lastViewType);
 
   router.push("/" + store.state.lastViewType);
 };

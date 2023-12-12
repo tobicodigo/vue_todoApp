@@ -25,8 +25,10 @@ const store = createStore({
     sortDirection: '',
     filter: {},
     savedFilter: {},
-    lastViewType:'',
+    lastViewType:'list',
     profileRecentlyUpdated:false,
+    tasks:[],
+    /*
     tasks: [
       {
         id: 0,
@@ -37,6 +39,7 @@ const store = createStore({
         createdDate: '2023-11-19',
         dueDate: '2023-11-25',
         assignee: "Cesc",
+        createdBy:"",
         isDone: false,
       },
       {
@@ -128,6 +131,8 @@ const store = createStore({
         isDone: false,
       },
     ],
+    */
+
     types: [
       i18n.global.t("homework"),
       i18n.global.t("school"),

@@ -95,7 +95,6 @@ const deleteProfile = () => {
   const sendDeleteProfile = async () => {
     const data = await ApiController.deleteProfile(store.state.user);
     submitResult.value = data;
-    console.log(submitResult.value.message)
 
     if (submitResult.value.message === "Profile deleted") {
       setTimeout(function () {
@@ -113,7 +112,7 @@ const logout = () => {
     function () {
       store.state.user.loggedIn = false;
       store.state.user.photo = "";
-
+      store.state.tasks = [];
       router.push("/login");
     }.bind(this),
     1000

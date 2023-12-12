@@ -4,7 +4,7 @@
       <ModalsContainer />
 
       <ion-header>
-        <tool-bar :viewType="route.name" :heading="heading"></tool-bar>
+        <tool-bar :viewType="store.state.lastViewType" :heading="heading"></tool-bar>
       </ion-header>
 
       <ion-content class="content">
@@ -26,9 +26,8 @@ import ToolBar from "./components/ToolBar.vue";
 import { useRoute } from "vue-router";
 import "vue-final-modal/style.css";
 import { ModalsContainer } from "vue-final-modal";
-import ApiController from "./api/api";
-
-ApiController.getTasks();
+import { useStore } from "vuex";
+const store = useStore();
 
 const route = useRoute();
 const { t } = useI18n();

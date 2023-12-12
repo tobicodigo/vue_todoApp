@@ -40,7 +40,7 @@
 <script setup>
 import CustomButton from "../components/CustomButton.vue";
 import ColorPicker from "../components/ColorPicker.vue";
-import { ref, watch,onMounted } from "vue";
+import { ref,onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";

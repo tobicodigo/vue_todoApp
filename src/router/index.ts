@@ -8,7 +8,7 @@ import RegisterView from "@/views/RegisterView.vue";
 import PasswordResetView from "../views/PasswordResetView.vue"
 import LoginView from "@/views/LoginView.vue";
 import EditProfileView from "@/views/EditProfileView.vue";
-
+import { useStore } from "vuex";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -72,6 +72,18 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+
+router.beforeEach((to, from, next) => {
+  const store = useStore();
+  if(to.name==='card') {
+  store.state.lastViewType='card';
+  }
+  if(to.name==='home') {
+    store.state.lastViewType='list';
+    }
+  next();
 });
 
 export default router;

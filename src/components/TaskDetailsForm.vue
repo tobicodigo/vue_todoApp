@@ -27,7 +27,7 @@
         {{ type }}
       </option>
     </select>
-    <hr>
+    <hr />
     <custom-button type="submit" color="#458FF1">{{
       $t("saveTask")
     }}</custom-button>
@@ -38,9 +38,10 @@
 <script>
 import CustomButton from "../components/CustomButton.vue";
 import ColorPicker from "../components/ColorPicker.vue";
+import ApiController from "../api/api";
 
 export default {
-  components: { CustomButton,ColorPicker },
+  components: { CustomButton, ColorPicker, ApiController },
   props: {
     task: {
       type: Object,
@@ -48,11 +49,9 @@ export default {
         id: 0,
         title: "",
         description: "",
-        category: "",
         color: 0,
-        startDate: "",
-        endDate: "",
         assignee: "",
+        createdBy: "",
         isDone: false,
       },
     },
@@ -63,26 +62,83 @@ export default {
   },
   methods: {
     submitForm() {
-      setTimeout(
-        function () {
-          if (this.mode === "add") {
-            this.$store.state.tasks.unshift(this.task);
-          } else if (this.mode === "edit") {
-            const index =  this.$store.state.tasks.findIndex((task) => task.id === this.task.id);
-            this.$store.state.tasks[index] = this.task;
-          }
-        }.bind(this),
-        1000
-      );
+      if (this.mode === "add") {
+        this.addTask();
+      } else if (this.mode === "edit") {
+        this.editTask();
+      }
+    },
+    addTask() {
+      if (this.$store.state.user.loggedIn) {
+        const sendCreateTask = async () => {
+          this.task.createdBy = this.$store.state.user.id;
+          const data = await ApiController.createTask(this.task);
+          this.submitResult = data;
+          console.log(this.submitResult);
 
-      this.$router.push("/" + this.$store.state.lastViewType);
+          if (this.submitResult.message === "Task created") {
+            this.task.id = this.submitResult.id;
+            this.task.createdDate = this.submitResult.createdDate;
+            this.$router.push("/" + this.$store.state.lastViewType);
+            setTimeout(
+              function () {
+                this.$store.state.tasks.unshift(this.task);
+              }.bind(this),
+              1000
+            );
+          }
+        };
+        sendCreateTask();
+      } else {
+        setTimeout(
+          function () {
+            this.$store.state.tasks.unshift(this.task);
+          }.bind(this),
+          1000
+        );
+
+        this.$router.push("/" + this.$store.state.lastViewType);
+      }
+    },
+    editTask() {
+      if (this.$store.state.user.loggedIn) {
+        const sendUpdateTask = async () => {
+          const data = await ApiController.updateTask(this.task);
+          this.submitResult = data;
+          console.log(this.submitResult);
+
+          if (this.submitResult.message === "Task updated") {
+            setTimeout(
+              function () {
+                const index = this.$store.state.tasks.findIndex(
+                  (task) => task.id === this.task.id
+                );
+                this.$store.state.tasks[index] = this.task;
+                this.$router.push("/" + this.$store.state.lastViewType);
+              }.bind(this),
+              1000
+            );
+          }
+        };
+        sendUpdateTask();
+      } else {
+        setTimeout(
+          function () {
+            const index = this.$store.state.tasks.findIndex(
+              (task) => task.id === this.task.id
+            );
+            this.$store.state.tasks[index] = this.task;
+            this.$router.push("/" + this.$store.state.lastViewType);
+          }.bind(this),
+          1000
+        );
+      }
     },
     resetForm() {
       this.task = {
         id: 0,
         title: "",
         description: "",
-        category: "",
         color: 0,
         startDate: "",
         endDate: "",

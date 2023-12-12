@@ -36,7 +36,6 @@ const filteredTasks = computed(() => {
   let filtered = store.state.tasks;
 
   if (store.state.filter.color !== undefined) {
-    console.log("filter color" + store.state.filter.color);
     filtered = filtered.filter(
       (task) => task.color === store.state.filter.color
     );
@@ -46,19 +45,16 @@ const filteredTasks = computed(() => {
     store.state.filter.type !== undefined &&
     store.state.filter.type !== "none"
   ) {
-    console.log("filter type");
     filtered = filtered.filter((task) => task.type === store.state.filter.type);
   }
 
   if (store.state.filter.startDate !== undefined) {
-    console.log("filter startDate");
     filtered = filtered.filter(
       (task) => task.dueDate >= store.state.filter.startDate
     );
   }
 
   if (store.state.filter.endDate !== undefined) {
-    console.log("filter startDate");
     filtered = filtered.filter(
       (task) => task.dueDate <= store.state.filter.endDate
     );

@@ -1,18 +1,22 @@
 import { CapacitorHttp } from "@capacitor/core";
+import store  from "../store/store";
 
 const apiController = {
   url: "https://duetogether.online/api/",
-
-  getTasks: async function () {
+  store:store,
+  getTasks: async function (forUser) {
     const options = {
       url: this.url,
       headers: {
         Accept: "*",
       },
+      data: { method: "getTasks", user: forUser },
     };
 
-    const response = await CapacitorHttp.get(options);
+
+    const response = await CapacitorHttp.post(options);
     const object = JSON.parse(response.data);
+    this.store.state.tasks = object;
     const array = object.result;
     return object;
   },
@@ -92,7 +96,8 @@ const apiController = {
 
     const response = await CapacitorHttp.post(options);
     const object = JSON.parse(response.data);
-    const array = object.result;
+    this.store.state.user = object.user;
+    this.getTasks(this.store.state.user)
     return object;
   },
 
@@ -126,13 +131,13 @@ const apiController = {
     return object;
   },
 
-  createTask: async function () {
+  createTask: async function (forTask) {
     const options = {
       url: this.url,
       headers: {
         Accept: "*",
       },
-      data: { method: "post" },
+      data: { method: "createTask", task:forTask },
     };
 
     const response = await CapacitorHttp.post(options);
@@ -141,13 +146,13 @@ const apiController = {
     return object;
   },
 
-  editTask: async function () {
+  updateTask: async function (forTask) {
     const options = {
       url: this.url,
       headers: {
         Accept: "*",
       },
-      data: { method: "edit" },
+      data: { method: "updateTask", task:forTask },
     };
 
     const response = await CapacitorHttp.post(options);
@@ -156,13 +161,13 @@ const apiController = {
     return object;
   },
 
-  deleteTask: async function () {
+  deleteTask: async function (forTask) {
     const options = {
       url: this.url,
       headers: {
         Accept: "*",
       },
-      data: { method: "delete" },
+      data: { method: "deleteTask",task:forTask },
     };
 
     const response = await CapacitorHttp.post(options);

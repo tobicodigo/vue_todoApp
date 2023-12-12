@@ -4,17 +4,22 @@
       <toggle
         :checked="task.isDone"
         checkmark="true"
-        @setDone="(i) => (task.isDone = i)"
+        @setDone="(i) => updateTask(i)"
       ></toggle>
     </div>
 
     <div class="content xl:w-7/12 lg:w-1/2 p-4">
       <h2>{{ task.title }}</h2>
       <div class="dueDate">
-        {{ remainingDays }} <span class="dueDate" v-if="remainingDays===1">{{ $t("dayLeft") }} </span><span class="dueDate" v-else>{{ $t("daysLeft") }}</span>
-        <ion-img class="clockImage"
-                src="../../../resources/clock.png"
-              ></ion-img> {{ formattedDate }}
+        {{ remainingDays }}
+        <span class="dueDate" v-if="remainingDays === 1"
+          >{{ $t("dayLeft") }} </span
+        ><span class="dueDate" v-else>{{ $t("daysLeft") }}</span>
+        <ion-img
+          class="clockImage"
+          src="../../../resources/clock.png"
+        ></ion-img>
+        {{ formattedDate }}
       </div>
 
       <div class="description">{{ task.description }}</div>
@@ -42,11 +47,12 @@ import toggle from "./Toggle.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
+import ApiController from "../api/api";
 const store = useStore();
 const i18n = useI18n();
-
 const props = defineProps(["task"]);
 const task = props.task;
+const submitResult = ref()
 
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 
@@ -57,6 +63,16 @@ const remainingDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
 const formattedDate = new Date(task.dueDate).toLocaleDateString(
   i18n.locale.value
 );
+
+const updateTask = async (i) => {
+  task.isDone = i;
+
+  const data = await ApiController.updateTask(task);
+  submitResult.value = data;
+
+  if (submitResult.value.message === "Task updated") {
+  }
+};
 </script>
 
 <style scoped>
@@ -102,11 +118,11 @@ h2 {
 
 .dueDate {
   color: #97a1ad;
-  padding-right:5px;
+  padding-right: 5px;
 }
 
-.clockImage{
-  margin-top:-3px;
+.clockImage {
+  margin-top: -3px;
   display: inline-block;
   width: 20px;
   vertical-align: middle;
@@ -138,28 +154,24 @@ li {
   padding-top: 45px;
   text-align: right;
   min-width: 300px;
-
 }
 
-
-@media screen and (max-width: 750px)  {
+@media screen and (max-width: 750px) {
   .toggleContainer {
-width: 100%;
-text-align: right;
-padding: 20px 0px 0px 0px;
-}
+    width: 100%;
+    text-align: right;
+    padding: 20px 0px 0px 0px;
+  }
 
-.content {
-  width: 100%;
-  padding: 0px 30px 0px 30px;
-}
+  .content {
+    width: 100%;
+    padding: 0px 30px 0px 30px;
+  }
 
-.editContainer {
-  width: 100%;
-text-align: right;
-padding: 30px 10px 30px 0px;
+  .editContainer {
+    width: 100%;
+    text-align: right;
+    padding: 30px 10px 30px 0px;
+  }
 }
-
-}
-
 </style>

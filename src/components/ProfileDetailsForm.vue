@@ -42,7 +42,7 @@
     <div
       class="error"
       v-if="
-        user.password && confirmPassword && user.password !== confirmPassword
+        password && confirmPassword && password !== confirmPassword
       "
     >
       {{ $t("passwordSimilarity") }}
