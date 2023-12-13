@@ -48,7 +48,7 @@ const messages = {
     profileExists: "Profile already exists",
     hello: "Hello",
     thanksForRegistration: "We are glad that you are here!",
-    startAddTask: "Start and add task",
+    startAddTask: "Start and add a task",
     forgotPassword: "Forgot your password?",
     registerProfile: "No login yet? Register here",
     passwordQuestionAndAnswerRequired:
@@ -72,6 +72,9 @@ const messages = {
     updateProfile: "Update Profile",
     logout:"Logout",
     showMyTasks:"Show my tasks",
+    welcome1: "Welcome to dueTogether",
+    welcome2: "Your daily task companion.",
+    mobileApp: "Please also try out our Mobile App!",
   },
   es: {
     home: "Mis Tareas",
@@ -147,6 +150,9 @@ const messages = {
     updateProfile: "Actualizar perfil",
     logout:"Logout",
     showMyTasks:"Ver mis tareas",
+    welcome1: "Bienvenido a dueTogether",
+    welcome2: "Tu compañero de tareas diarias.",
+    mobileApp: "Pruebe también nuestra aplicación móvil!",
 
   },
   de: {
@@ -223,7 +229,9 @@ const messages = {
     updateProfile:"Profil aktualisieren",
     logout:"Logout",
     showMyTasks:"Meine Aufgaben anzeigen",
-
+    welcome1: "Willkommen auf dueTogether",
+    welcome2: "Ihr täglicher Begleiter für Ihren Alltag.",
+    mobileApp: "Bitte probiere auch unsere App aus!",
   },
 };
 

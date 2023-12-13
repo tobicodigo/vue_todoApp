@@ -21,6 +21,8 @@ const store = createStore({
       photo: String,
       loggedIn: false,
     },
+    startPageVisited: false,
+    devicePlatform: '',
     searchString : '',
     sortDirection: '',
     filter: {},

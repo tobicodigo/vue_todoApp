@@ -1,6 +1,8 @@
 <template>
+  <!-- Task Card -->
   <div class="content-card">
     <div class="card-big-shadow">
+      <!-- Card Content -->
       <div
         class="card card-just-text"
         data-background="color"
@@ -8,13 +10,17 @@
         data-radius="none"
         :style="{ backgroundColor: activeColor }"
       >
+        <!-- Card Header -->
         <div class="cardHeader">
+          <!-- Toggle Component for Task Completion -->
           <toggle
             :checked="task.isDone"
             :checkmark="false"
-            @setDone="(i) => (updateTask(i))"
+            @setDone="(i) => updateTask(i)"
           ></toggle>
+          <!-- Link to Edit Task -->
           <router-link :to="'/edit/task/' + task.id">
+            <!-- Edit Icon -->
             <ion-img
               class="editButton"
               src="../../../resources/menu_black_stroke.png"
@@ -22,6 +28,7 @@
           </router-link>
         </div>
 
+        <!-- Task Details -->
         <div class="content">
           <h6 class="category">{{ store.state.types[task.type] }}</h6>
           <h4 class="title">{{ task.title }}</h4>
@@ -29,11 +36,15 @@
             {{ task.description }}
           </p>
         </div>
+        <!-- Due Date -->
         <div class="dueDate">
           {{ remainingDays }}
-          <span class="dueDate" v-if="remainingDays === 1"
-            >{{ $t("day") }} </span
-          ><span class="dueDate" v-else>{{ $t("days") }}</span>
+          <span class="dueDate" v-if="remainingDays === 1">
+            {{ $t("day") }}
+          </span>
+          <span class="dueDate" v-else>
+            {{ $t("days") }}
+          </span>
           <ion-img
             class="clockImage"
             src="../../../resources/clock_white.png"
@@ -41,13 +52,13 @@
           {{ formattedDate }}
         </div>
       </div>
-
-      <!-- end card -->
+      <!-- End of Card Content -->
     </div>
   </div>
 </template>
 
 <script setup>
+// Importing necessary components and libraries
 import { IonImg } from "@ionic/vue";
 import { ref } from "vue";
 import toggle from "./Toggle.vue";
@@ -55,27 +66,33 @@ import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 import ApiController from "../api/api";
 
+// Initializing necessary variables
 const i18n = useI18n();
 const store = useStore();
 const props = defineProps(["task"]);
 const task = props.task;
-const submitResult = ref()
+const submitResult = ref();
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 
+// Calculating remaining days for the task
 const dueDateTimeStamp = new Date(task.dueDate).getTime();
 const difference = Math.abs(dueDateTimeStamp - Date.now());
 const remainingDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
+// Formatting date based on locale
 const formattedDate = new Date(task.dueDate).toLocaleDateString(
   i18n.locale.value
 );
+
+// Function to update task completion status
 const updateTask = async (i) => {
   task.isDone = i;
-
   const data = await ApiController.updateTask(task);
   submitResult.value = data;
 
+  // Checking for successful task update
   if (submitResult.value.message === "Task updated") {
+    // Additional logic can be added here
   }
 };
 </script>

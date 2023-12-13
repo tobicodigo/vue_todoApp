@@ -13,14 +13,33 @@
       :key="task.id"
     ></Card-item>
   </TransitionGroup>
-  <div class="noEntriesContainer"  v-if="filteredTasks.length === 0">
-    <div class="noEntries">{{ $t("noEntryHeading")}}</div>
-    <span class="noEntriesDescription">{{ $t("noEntryDescription")}}</span>
+  <div
+    class="noEntriesContainer"
+    v-if="filteredTasks.length === 0 && store.state.startPageVisited"
+  >
+    <div class="noEntries">{{ $t("noEntryHeading") }}</div>
+    <span class="noEntriesDescription">{{ $t("noEntryDescription") }}</span>
+  </div>
+
+  <div class="qrcode" v-if="store.state.startPageVisited === false">
+    <div class="welcome">
+      {{ $t('welcome1')}}<br />{{ $t('welcome2')}}<br><br>
+      <router-link to="/add">
+        <custom-button color="#458FF1">{{
+          $t("startAddTask")
+        }}</custom-button></router-link
+      >
+    </div>
+    <div v-if="store.state.devicePlatform === 'web'">
+      {{ $t('mobileApp')}}
+      <img :src="'/resources/qr.png'" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed, onUpdated } from "vue";
+import CustomButton from "../components/CustomButton.vue";
 import ListItem from "./ListItem.vue";
 import CardItem from "./CardItem.vue";
 import { useStore } from "vuex";
@@ -145,5 +164,24 @@ ul {
   padding-top: 80px;
 }
 
+.welcome {
+  font-size: larger;
+  font-weight: bolder;
+  margin-bottom: 23%;
+}
 
+.qrcode {
+  color: #ab2070;
+  text-align: center;
+  margin: auto;
+  margin-top: 8%;
+  height: 100%;
+  width: 300px;
+  height: 300px;
+}
+
+.qrcode img {
+  margin: auto;
+  max-width: 200px;
+}
 </style>
