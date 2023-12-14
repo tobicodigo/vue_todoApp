@@ -1,6 +1,5 @@
 <template>
-  <!-- Task Card -->
-  <div class="content-card">
+  <li class="content-card">
     <div class="card-big-shadow">
       <!-- Card Content -->
       <div
@@ -54,7 +53,7 @@
       </div>
       <!-- End of Card Content -->
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup>

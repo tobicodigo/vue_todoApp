@@ -11,12 +11,10 @@ import EditProfileView from "@/views/EditProfileView.vue";
 import { useStore } from "vuex";
 
 const routes: Array<RouteRecordRaw> = [
-  // Route definition for root, redirect to /home
   {
     path: "/",
     redirect: "/home",
   },
-  // Route for home and card views using MainView component
   {
     path: "/home",
     name: "home",
@@ -27,7 +25,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "card",
     component: MainView,
   },
-  // Other routes for different views
   {
     path: "/filter",
     name: "filter",
@@ -71,30 +68,25 @@ const routes: Array<RouteRecordRaw> = [
   { path: "/:pathMatch(.*)*", name: "home", component: MainView },
 ];
 
-// Route creation using router's history and defined routes
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 
-// Navigation guard: Executed before each route navigation
 router.beforeEach((to, from, next) => {
-  const store = useStore(); // Accessing Vuex store
-
-  // Handling view types based on route names
+  const store = useStore();
   if (to.name === "card") {
     store.state.lastViewType = "card";
   }
   if (to.name === "home") {
     store.state.lastViewType = "list";
   }
-
-  // Setting 'startPageVisited' to true for all routes except 'home'
-  if (to.name !== "home") {
-    store.state.startPageVisited = true;
+  if(to.name!=="home") {
+    setTimeout(() => {
+      store.state.startPageVisited = true;
+    }, 1000);
   }
-
-  next(); // Continue navigation
+  next();
 });
 
 export default router;

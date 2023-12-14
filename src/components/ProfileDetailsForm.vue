@@ -27,7 +27,7 @@
 
     <!-- User's name input -->
     <label for="name">{{ $t("name") }}</label>
-    <input type="text" id="name" v-model="user.name" required />
+    <input type="text" id="name" v-model="user.name" required autocomplete="username" />
 
     <!-- Component for capturing user's photo -->
     <foto-capture
@@ -38,7 +38,7 @@
 
     <!-- Password input -->
     <label for="password">{{ $t("password") }}</label>
-    <input type="password" id="password" v-model="password" />
+    <input type="password" id="password" v-model="password" autocomplete="new-password" />
 
     <!-- Displaying error message for password strength -->
     <div class="error" v-if="password && !isValidPassword">
@@ -52,6 +52,7 @@
       id="confirmPassword"
       v-model="confirmPassword"
       :required="!user.loggedIn"
+      autocomplete="new-password"
     />
 
     <!-- Displaying error message if passwords do not match -->

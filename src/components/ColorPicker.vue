@@ -1,11 +1,12 @@
 <template>
   <!-- Rendering color options -->
   <div class="color-options">
-    <label v-for="(color, index) in store.state.colors" :key="index">
+    <label v-for="(color, index) in store.state.colors" :for="color" :key="color">
       <!-- Radio input for each color option -->
       <input
         type="radio"
-        name="color"
+        :name="color"
+        :id="color"
         :value="index"
         :checked="isChecked(index)"
         @change="handleChange(index)"

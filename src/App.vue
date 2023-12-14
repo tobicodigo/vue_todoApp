@@ -1,19 +1,21 @@
 <template>
-  <!-- Ionic application structure -->
   <ion-app>
     <ion-page>
-      <!-- Modals container for Vue Final Modal -->
+      <!-- ModalsContainer component for handling modals -->
       <ModalsContainer />
 
-      <!-- Ion Header with ToolBar component -->
       <ion-header>
-        <tool-bar :viewType="store.state.lastViewType" :heading="heading"></tool-bar>
+        <!-- ToolBar component with dynamic viewType and heading -->
+        <tool-bar
+          :viewType="store.state.lastViewType"
+          :heading="heading"
+        ></tool-bar>
       </ion-header>
 
-      <!-- Ion Content for main content area -->
       <ion-content class="content">
-        <!-- Router view with transition -->
+        <!-- Router view for dynamic component rendering -->
         <router-view v-slot="{ Component, route }">
+          <!-- Transition for component changes -->
           <transition name="slide-out-to-top" mode="out-in">
             <!-- Dynamic component rendering based on route -->
             <component :is="Component" :key="route.path" />
@@ -25,25 +27,25 @@
 </template>
 
 <script setup lang="ts">
-// Import necessary components and modules
+// Import necessary Ionic components and libraries
 import { IonApp, IonContent, IonHeader, IonPage } from "@ionic/vue";
 import { Device } from "@capacitor/device";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
+
+// Import components and functions
 import ToolBar from "./components/ToolBar.vue";
 import { useRoute } from "vue-router";
 import "vue-final-modal/style.css";
 import { ModalsContainer } from "vue-final-modal";
 import { useStore } from "vuex";
 
-// Initialize Vuex Store and Vue Router
+// Initialize store, route, and i18n instances
 const store = useStore();
 const route = useRoute();
-
-// Initialize i18n instance for translation
 const { t } = useI18n();
 
-// Fetch device platform information using Capacitor Device API
+// Function to retrieve device platform information
 async function getPlatform() {
   const info = await Device.getInfo();
   store.state.devicePlatform = info.platform;
@@ -52,7 +54,7 @@ async function getPlatform() {
 // Call the function to get the platform information
 getPlatform();
 
-// Computed property for dynamic heading based on route name or default to "home"
+// Computed property for dynamically generating heading based on route name
 const heading = computed(() => {
   if (!route.name) {
     return t("home");

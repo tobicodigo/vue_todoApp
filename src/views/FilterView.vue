@@ -1,27 +1,29 @@
 <template>
-  <!-- Form for applying filters -->
   <div>
+    <!-- Form for filtering tasks -->
     <form class="form" @submit.prevent>
-      <!-- Filter by start date -->
-      <label for="task-date">{{ $t("filterStartDate") }}</label>
-      <input type="date" id="task-date" v-model="filter.startDate" />
+      <!-- Start Date input -->
+      <label for="task-start-date">{{ $t("filterStartDate") }}</label>
+      <input type="date" id="task-start-date" v-model="filter.startDate" />
 
-      <!-- Filter by end date -->
-      <label for="task-date">{{ $t("filterEndDate") }}</label>
-      <input type="date" id="task-date" v-model="filter.endDate" />
+      <!-- End Date input -->
+      <label for="task-end-date">{{ $t("filterEndDate") }}</label>
+      <input type="date" id="task-end-date" v-model="filter.endDate" />
 
-      <!-- Filter by color using ColorPicker component -->
+      <!-- Color Picker component -->
       <label for="color-picker">{{ $t("pickColor") }}</label>
       <color-picker
         id="color-picker"
+        name="color-picker"
         v-model="filter.color"
         :key="filter.color"
       ></color-picker>
 
-      <!-- Filter by task type using select dropdown -->
+      <!-- Task Type dropdown -->
       <label for="task-type">{{ $t("taskType") }}</label>
       <select id="task-type" v-model="filter.type">
         <option value="none"></option>
+        <!-- Options based on types from Vuex store -->
         <option
           v-for="(type, index) in store.state.types"
           :key="index"
@@ -33,22 +35,24 @@
 
       <hr />
 
-      <!-- Apply filter button -->
-      <custom-button type="submit" color="#458FF1" @click="applyFilter">
-        {{ $t("filterTask") }}
-      </custom-button>
+      <!-- Apply Filter button -->
+      <custom-button type="submit" color="#458FF1" @click="applyFilter">{{
+        $t("filterTask")
+      }}</custom-button>
 
-      <!-- Reset filter button -->
-      <custom-button type="submit" color="#ACACAC" @click="resetFilter">
-        {{ $t("resetFilter") }}
-      </custom-button>
+      <!-- Reset Filter button -->
+      <custom-button type="submit" color="#ACACAC" @click="resetFilter">{{
+        $t("resetFilter")
+      }}</custom-button>
+
+      <!-- Slot for additional content -->
       <slot></slot>
     </form>
   </div>
 </template>
 
 <script setup>
-// Importing necessary components and hooks
+// Importing necessary components and libraries
 import CustomButton from "../components/CustomButton.vue";
 import ColorPicker from "../components/ColorPicker.vue";
 import { ref, onMounted } from "vue";
@@ -56,27 +60,27 @@ import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 
-// Creating references
+// Initializing necessary variables and hooks
 const i18n = useI18n();
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
 
-// Creating a reactive reference for filter state
+// Creating a reactive reference for filter data
 const filter = ref({});
 
-// Executing code on component mount
+// On component mount, set filter state based on saved filter data from Vuex
 onMounted(() => {
-  // Resetting store filter state and setting saved filter if available
   store.state.filter = {};
   if (Object.keys(store.state.savedFilter).length > 0) {
     filter.value = store.state.savedFilter;
   }
 });
 
-// Applying filter logic
+// Function to apply the filter
 const applyFilter = () => {
   setTimeout(function () {
+    // Save and apply filter data to the Vuex store and route to last view type
     store.state.savedFilter = filter.value;
     store.state.filter = store.state.savedFilter;
     filter.value = {};
@@ -84,8 +88,9 @@ const applyFilter = () => {
   router.push("/" + store.state.lastViewType);
 };
 
-// Resetting filter logic
+// Function to reset the filter
 const resetFilter = () => {
+  // Reset both filter and saved filter data in the Vuex store
   store.state.filter = {};
   store.state.savedFilter = {};
   filter.value = {};

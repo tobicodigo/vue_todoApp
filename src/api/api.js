@@ -96,8 +96,10 @@ const apiController = {
 
     const response = await CapacitorHttp.post(options);
     const object = JSON.parse(response.data);
+    if(object.message !=="Error") {
     this.store.state.user = object.user;
     this.getTasks(this.store.state.user)
+  }
     return object;
   },
 

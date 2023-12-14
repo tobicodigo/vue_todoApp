@@ -1,37 +1,41 @@
 <template>
-  <!-- Button component -->
+  <!-- Button Component Template -->
   <button class="button"
     type="button"
     :style="{ backgroundColor: color }"
-    @click="handleClick" 
+    @click="handleClick"
   >
-    <slot /> <!-- Displaying slot content inside the button -->
+    <!-- Inserting content from parent component -->
+    <slot />
   </button>
 </template>
 
 <script setup>
-// Importing necessary Vue composition API functions
-import { defineProps } from "vue";
+// Handling props and methods
 
 // Defining props for the button component
 const props = defineProps({
+  // Setting default color for the button
   color: {
     type: String,
-    default: "blue", // Default color value for the button
+    default: "blue",
   },
+  // Accepting task object as a prop
   task: {
     type: Object,
     required: false,
   },
 });
 
-// Method to handle button click (currently empty)
+// Placeholder function for handling button click
 const handleClick = () => {
-  // Functionality for handling button click can be added here
+  // Add functionality for button click here
 };
 </script>
 
+
 <style scoped>
+/* Add any button-specific styles here */
 .button {
   padding: 8px 36px;
   border: none;

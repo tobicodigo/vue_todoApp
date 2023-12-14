@@ -1,5 +1,4 @@
 <template>
-  <!-- List or Card view based on props.viewType -->
   <TransitionGroup tag="ul" name="list" v-if="props.viewType != 'card'">
     <List-item
       v-for="(task, index) in filteredTasks"
@@ -7,15 +6,13 @@
       :key="task.id"
     ></List-item>
   </TransitionGroup>
-  <TransitionGroup tag="ul" name="list" v-else class="cardList">
+  <TransitionGroup tag="ul" name="cards" v-else class="cardList">
     <Card-item
       v-for="(task, index) in filteredTasks"
       :task="task"
       :key="task.id"
     ></Card-item>
   </TransitionGroup>
-
-  <!-- Displayed when no tasks are available -->
   <div
     class="noEntriesContainer"
     v-if="filteredTasks.length === 0 && store.state.startPageVisited"
@@ -24,47 +21,44 @@
     <span class="noEntriesDescription">{{ $t("noEntryDescription") }}</span>
   </div>
 
-  <!-- Displayed before any tasks are added -->
   <div class="qrcode" v-if="store.state.startPageVisited === false">
     <div class="welcome">
-      {{ $t("welcome1") }}<br />{{ $t("welcome2") }}<br /><br />
+      {{ $t('welcome1')}}<br />{{ $t('welcome2')}}<br><br>
       <router-link to="/add">
-        <!-- Link to add tasks -->
-        <custom-button color="#458FF1">{{ $t("startAddTask") }}</custom-button>
-      </router-link>
+        <custom-button color="#458FF1">{{
+          $t("startAddTask")
+        }}</custom-button></router-link
+      >
     </div>
     <div v-if="store.state.devicePlatform === 'web'">
-      <!-- Displayed only on the web -->
-      {{ $t("mobileApp") }}
+      {{ $t('mobileApp')}}
       <img :src="'/resources/qr.png'" />
-      <!-- QR code image -->
     </div>
   </div>
 </template>
 
 <script setup>
-// Importing necessary Vue composition API functions and components
-import { computed, onUpdated, defineProps } from "vue";
+// Importing necessary components and libraries
+import { computed, onUpdated } from "vue";
 import CustomButton from "../components/CustomButton.vue";
 import ListItem from "./ListItem.vue";
 import CardItem from "./CardItem.vue";
 import { useStore } from "vuex";
 const store = useStore();
 
-// Defining props
+// Defining props received by the component
 const props = defineProps(["viewType"]);
 
-// Executed after each update
+// Updating the last view type in the Vuex store on component update
 onUpdated(() => {
-  store.state.lastViewType = props.viewType; // Setting last view type in Vuex store
+  store.state.lastViewType = props.viewType;
 });
 
-// Computing filtered tasks based on store state filters, search, and sorting
+// Computed property to filter tasks based on various criteria
 const filteredTasks = computed(() => {
-  let filtered = store.state.tasks; // Initial tasks from Vuex store
+  let filtered = store.state.tasks;
 
   // Filtering tasks based on color, type, dates, search string, and sort direction
-
   if (store.state.filter.color !== undefined) {
     filtered = filtered.filter(
       (task) => task.color === store.state.filter.color
@@ -102,6 +96,7 @@ const filteredTasks = computed(() => {
     );
   }
 
+  // Sorting tasks based on the specified sort direction
   if (store.state.sortDirection === "") {
     filtered.sort(function (a, b) {
       return new Date(a.createdDate) - new Date(b.createdDate);
@@ -119,6 +114,7 @@ const filteredTasks = computed(() => {
   return filtered;
 });
 </script>
+
 
 <style>
 ul {
@@ -149,6 +145,22 @@ ul {
 .list-leave-active {
   position: absolute;
 }
+
+
+.cards-move,
+.cards-enter-active,
+.cards-leave-active {
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.cards-enter-from,
+.cards-leave-to {
+  opacity: 0;
+  transform: translateX(-2rem);
+}
+.cards-leave-active {
+  position: absolute;
+}
+
 
 .noEntriesContainer {
   gap: 1rem;

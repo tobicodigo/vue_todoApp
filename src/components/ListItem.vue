@@ -1,47 +1,47 @@
 <template>
-  <!-- Task item display -->
   <li class="flex flex-wrap justify-content">
-    <!-- Checkbox to mark task completion -->
+    <!-- Container for task completion toggle -->
     <div class="toggleContainer xl:w-1/12 lg:w-1/6 p-4">
+      <!-- Toggle component for task completion -->
       <toggle
         :checked="task.isDone"
         checkmark="true"
         @setDone="(i) => updateTask(i)"
-      >
-      </toggle>
+      ></toggle>
     </div>
 
-    <!-- Task content and details -->
+    <!-- Main content section for task details -->
     <div class="content xl:w-7/12 lg:w-1/2 p-4">
       <!-- Task title -->
       <h2>{{ task.title }}</h2>
-      <!-- Remaining days for task completion -->
+      <!-- Due date information -->
       <div class="dueDate">
         {{ remainingDays }}
         <span class="dueDate" v-if="remainingDays === 1"
           >{{ $t("dayLeft") }} </span
         ><span class="dueDate" v-else>{{ $t("daysLeft") }}</span>
-        <!-- Clock icon for due date -->
         <ion-img
           class="clockImage"
           src="../../../resources/clock.png"
         ></ion-img>
-        {{ formattedDate }}
         <!-- Formatted due date -->
+        {{ formattedDate }}
       </div>
+
       <!-- Task description -->
       <div class="description">{{ task.description }}</div>
     </div>
 
-    <!-- Task details: category, color, and edit button -->
+    <!-- Container for category, color indicator, and edit button -->
     <div class="editContainer xl:w-2/12 sm:w-1/2 lg:w-1/5 p-4">
       <!-- Task category -->
       <span class="category">{{ store.state.types[task.type] }}</span>
-      <!-- Displaying active color -->
+      <!-- Color indicator -->
       <span class="color" :style="{ backgroundColor: activeColor }"></span>
-      <!-- Edit button linking to task edit page -->
+      <!-- Link to edit task -->
       <span class="editButton">
         <router-link :to="'/edit/task/' + task.id">
+          <!-- Edit button icon -->
           <ion-button fill="clear"
             ><ion-img
               class="editButton"
@@ -55,50 +55,46 @@
 </template>
 
 <script setup>
-// Importing necessary Vue components and functions
-import { IonButton, IonImg } from "@ionic/vue"; // Ionic components
-import toggle from "./Toggle.vue"; // Custom toggle component
-import { ref } from "vue"; // Vue composition API function
-import { useI18n } from "vue-i18n"; // Internationalization function
-import { useStore } from "vuex"; // Vuex store function
-import ApiController from "../api/api"; // API controller
-
-// Accessing store and i18n instances
+// Importing necessary components and libraries
+import { IonButton, IonImg } from "@ionic/vue";
+import toggle from "./Toggle.vue";
+import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
+import ApiController from "../api/api";
 const store = useStore();
 const i18n = useI18n();
 
-// Defining props
-const props = defineProps(["task"]); // Task prop passed to the component
-const task = props.task; // Task object from props
-const submitResult = ref(); // Reference to store submit result
-
-// Active color based on task color
+// Defining props and variables
+const props = defineProps(["task"]);
+const task = props.task;
+const submitResult = ref();
 const activeColor = ref("var(" + store.state.colors[task.color] + ")");
 
-// Calculating remaining days for task completion
+// Calculating remaining days for the task
 const dueDateTimeStamp = new Date(task.dueDate).getTime();
 const difference = Math.abs(dueDateTimeStamp - Date.now());
 const remainingDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
-// Formatting task due date based on locale
+// Formatting date based on locale
 const formattedDate = new Date(task.dueDate).toLocaleDateString(
   i18n.locale.value
 );
 
-// Method to update task completion status
+// Function to update task completion status
 const updateTask = async (i) => {
-  task.isDone = i; // Updating task completion status
+  task.isDone = i;
 
-  // Sending updated task data to the API controller
   const data = await ApiController.updateTask(task);
-  submitResult.value = data; // Storing the submission result
+  submitResult.value = data;
 
-  // Handling task update success if needed
+  // Checking for successful task update
   if (submitResult.value.message === "Task updated") {
-    // Perform actions on successful task update
+    // Additional logic can be added here
   }
 };
 </script>
+
 
 <style scoped>
 h2 {

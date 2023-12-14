@@ -1,5 +1,5 @@
 <template>
-  <!-- Toggle switch input -->
+  <!-- Checkbox input element -->
   <input
     id="toggle"
     class="toggle"
@@ -8,31 +8,33 @@
     name="toggle"
     value="on"
     :checked="checked"
-    v-model="isDone"
-    @change="$emit('setDone', isDone)"
+    v-model="isDone"   
+    @change="$emit('setDone', isDone)" 
   />
-  <!-- Label for the toggle switch -->
+
+  <!-- Label for displaying checkmark -->
   <label
     for="toggle"
     class="slot"
     v-bind:style="props.checkmark ? 'display: inline-block;' : 'display: none;'"
   >
-    <!-- Checkmark display -->
-    <span class="slot__label">&nbsp;</span>
-
-    <span class="slot__label">✔︎</span>
+    <span class="slot__label">&nbsp;</span> <!-- Empty space -->
+    <span class="slot__label">✔︎</span> <!-- Checkmark symbol -->
   </label>
 </template>
 
 <script setup>
-// Importing necessary Vue functions
+// Importing necessary components and libraries
 import { ref } from "vue";
 
-// Defining props and emits for the component
-const props = defineProps(["checked", "checkmark"]); // Receiving 'checked' and 'checkmark' props
-const emits = defineEmits(["setDone"]); // Emitting 'setDone' event
-const isDone = ref(); // Reactive variable for the toggle switch state
+// Define props and emits for the component
+const props = defineProps(["checked", "checkmark"]);
+const emits = defineEmits(["setDone"]);
+
+// Local reactive variable for managing checkbox state
+const isDone = ref(); // This variable holds the state of the checkbox
 </script>
+
 
 <style scoped>
 .toggle,
