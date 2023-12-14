@@ -8,6 +8,13 @@ Universidad La Salle - Task App Project
 
 [open in Figma][Figma-url]
 
+## Results
+
+
+[Website][website-url]
+[Appstore][appstore-url]
+[Playstore][playstore-url]
+
 
 ### Built With
 
@@ -47,9 +54,20 @@ please only edit files in /src/ folder
 
 - [x] Create Wireframe
 - [x] Create basic structure
-- [ ] Add Task View Formulario (Javier) lo encuentras en src/views/AddTaskView.vue
-- [ ] Filter View Formulario (LLuis)  lo encuentras en src/views/FilterView.vue
-
+- [x] Add Task View Formulario (Javier) lo encuentras en src/views/AddTaskView.vue
+- [x] Edit Task
+- [x] Login Formulario (Javier) 
+- [x] Password Recovery Formulario (Javier) 
+- [x] Filter View
+- [x] Multi-Language support
+- [x] Sort function
+- [x] SQL Database
+- [x] API
+- [x] Delete Task
+- [x] Edit Profile
+- [x] Delete profile
+- [x] Upload Appstore
+- [x] Upload Playstore
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -57,3 +75,6 @@ please only edit files in /src/ folder
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
 [Vue-url]: https://vuejs.org/
 [Figma-url]: https://www.figma.com/file/BX5I9TkSCGDfPRFjv4IIUm/La-Salle?type=design&node-id=0%3A1&mode=design&t=eOF3BVwBx8I1iHft-1
+[appstore-url]: https://apps.apple.com/app/duetogether/id6473671638
+[playstore-url]: https://play.google.com/store/apps/details?id=com.tobapps.duetogether
+[website-url]: https://www.duetogether.online
