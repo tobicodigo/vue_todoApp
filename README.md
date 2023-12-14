@@ -8,6 +8,8 @@ Universidad La Salle - Task App Project
 
 [open in Figma][Figma-url]
 
+
+
 ## Results
 
 
@@ -18,9 +20,13 @@ Universidad La Salle - Task App Project
 [Playstore][playstore-url]
 
 
+
+
 ## Built With
 
 * [![Vue][Vue.js]][Vue-url]
+
+
 
 
 
