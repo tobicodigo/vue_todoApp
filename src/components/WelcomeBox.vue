@@ -1,36 +1,43 @@
 <template>
+  <!-- Conditional rendering based on user login status -->
   <div v-if="$store.state.user.loggedIn" class="form centered">
-    <span
-      >{{ $t('hello') }} {{ $store.state.user.name
-      }}<img
+    <!-- Greeting message with user's name and confetti image -->
+    <span>
+      {{ $t('hello') }} {{ $store.state.user.name }}
+      <img
         class="confetti"
         :src="'resources/confetti.gif'"
-        alt="Foto de perfil"
-    /></span>
+        alt="Confetti"
+      />
+    </span>
 
+    <!-- Displaying user's profile picture if available -->
     <img
       v-if="$store.state.user.photo"
       class="profile"
       :src="'data:image/jpeg;base64,' + $store.state.user.photo"
-      alt="Foto de perfil"
+      alt="Profile"
     />
+    <!-- Heading title -->
     <h2>{{ props.title }}</h2>
-    <router-link v-if="props.showAddbutton" to="/add"
-      >
-      <hr>
-      <custom-button class="smallButton" color="#458FF1">{{
-        $t("startAddTask")
-      }}</custom-button></router-link
-    >
-    <slot></slot>
+
+    <!-- Router link to add task page if 'showAddbutton' prop is true -->
+    <router-link v-if="props.showAddbutton" to="/add">
+      <hr /> <!-- Horizontal line for separation -->
+      <!-- Custom button for adding tasks -->
+      <custom-button class="smallButton" color="#458FF1">
+        {{ $t("startAddTask") }}
+      </custom-button>
+    </router-link>
+    <slot></slot> <!-- Default slot content -->
   </div>
 </template>
 
 <script setup>
-import CustomButton from "../components/CustomButton.vue";
-const props = defineProps(["showAddbutton", "title"]);
-
+import CustomButton from "../components/CustomButton.vue"; // Importing the CustomButton component
+const props = defineProps(["showAddbutton", "title"]); // Receiving 'showAddbutton' and 'title' props
 </script>
+
 
 <style scoped>
 

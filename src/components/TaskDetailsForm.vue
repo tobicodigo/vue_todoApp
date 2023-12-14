@@ -1,14 +1,15 @@
 <template>
+  <!-- Form for creating/editing a task -->
   <form class="form" @submit.prevent="submitForm">
+    <!-- Task Name input -->
     <label for="task-name">{{ $t("taskName") }}</label>
     <input type="text" id="task-name" v-model="task.title" required />
-    <label for="task-description">{{ $t("taskDescription") }}</label>
-    <textarea
-      id="task-description"
-      v-model="task.description"
-      required
-    ></textarea>
 
+    <!-- Task Description textarea -->
+    <label for="task-description">{{ $t("taskDescription") }}</label>
+    <textarea id="task-description" v-model="task.description" required></textarea>
+
+    <!-- Task Due Date input -->
     <label for="task-date">{{ $t("taskDate") }}</label>
     <input
       type="date"
@@ -17,9 +18,12 @@
       min="23.12.2023"
       required
     />
+
+    <!-- Color Picker component -->
     <label for="color-picker">{{ $t("pickColor") }}</label>
     <color-picker id="color-picker" v-model="task.color"></color-picker>
 
+    <!-- Task Type selection -->
     <label for="task-type">{{ $t("taskType") }}</label>
     <select id="task-type" v-model="task.type" required>
       <option value="" disabled>{{ $t("selectType") }}</option>
@@ -27,15 +31,21 @@
         {{ type }}
       </option>
     </select>
+
     <hr />
-    <custom-button type="submit" color="#458FF1">{{
-      $t("saveTask")
-    }}</custom-button>
+
+    <!-- Custom Button for form submission -->
+    <custom-button type="submit" color="#458FF1">
+      {{ $t("saveTask") }}
+    </custom-button>
+
+    <!-- Slot for additional content -->
     <slot></slot>
   </form>
 </template>
 
 <script>
+// Importing necessary Vue components and API controller
 import CustomButton from "../components/CustomButton.vue";
 import ColorPicker from "../components/ColorPicker.vue";
 import ApiController from "../api/api";
@@ -43,6 +53,7 @@ import ApiController from "../api/api";
 export default {
   components: { CustomButton, ColorPicker, ApiController },
   props: {
+    // Task object and mode (add/edit) as props
     task: {
       type: Object,
       default: {
@@ -134,8 +145,10 @@ export default {
         );
       }
     },
+    // Method to reset the form fields
     resetForm() {
-      this.task = {
+      // Resetting task object to default values
+        this.task = {
         id: 0,
         title: "",
         description: "",

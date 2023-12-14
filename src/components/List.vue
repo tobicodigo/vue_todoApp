@@ -1,4 +1,5 @@
 <template>
+  <!-- List or Card view based on props.viewType -->
   <TransitionGroup tag="ul" name="list" v-if="props.viewType != 'card'">
     <List-item
       v-for="(task, index) in filteredTasks"
@@ -13,6 +14,8 @@
       :key="task.id"
     ></Card-item>
   </TransitionGroup>
+
+  <!-- Displayed when no tasks are available -->
   <div
     class="noEntriesContainer"
     v-if="filteredTasks.length === 0 && store.state.startPageVisited"
@@ -21,38 +24,46 @@
     <span class="noEntriesDescription">{{ $t("noEntryDescription") }}</span>
   </div>
 
+  <!-- Displayed before any tasks are added -->
   <div class="qrcode" v-if="store.state.startPageVisited === false">
     <div class="welcome">
-      {{ $t('welcome1')}}<br />{{ $t('welcome2')}}<br><br>
+      {{ $t("welcome1") }}<br />{{ $t("welcome2") }}<br /><br />
       <router-link to="/add">
-        <custom-button color="#458FF1">{{
-          $t("startAddTask")
-        }}</custom-button></router-link
-      >
+        <!-- Link to add tasks -->
+        <custom-button color="#458FF1">{{ $t("startAddTask") }}</custom-button>
+      </router-link>
     </div>
     <div v-if="store.state.devicePlatform === 'web'">
-      {{ $t('mobileApp')}}
+      <!-- Displayed only on the web -->
+      {{ $t("mobileApp") }}
       <img :src="'/resources/qr.png'" />
+      <!-- QR code image -->
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, onUpdated } from "vue";
+// Importing necessary Vue composition API functions and components
+import { computed, onUpdated, defineProps } from "vue";
 import CustomButton from "../components/CustomButton.vue";
 import ListItem from "./ListItem.vue";
 import CardItem from "./CardItem.vue";
 import { useStore } from "vuex";
 const store = useStore();
 
+// Defining props
 const props = defineProps(["viewType"]);
 
+// Executed after each update
 onUpdated(() => {
-  store.state.lastViewType = props.viewType;
+  store.state.lastViewType = props.viewType; // Setting last view type in Vuex store
 });
 
+// Computing filtered tasks based on store state filters, search, and sorting
 const filteredTasks = computed(() => {
-  let filtered = store.state.tasks;
+  let filtered = store.state.tasks; // Initial tasks from Vuex store
+
+  // Filtering tasks based on color, type, dates, search string, and sort direction
 
   if (store.state.filter.color !== undefined) {
     filtered = filtered.filter(

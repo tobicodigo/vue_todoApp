@@ -1,14 +1,19 @@
 <template>
+  <!-- Task Detail Form and VueFinalModal components -->
   <div>
+    <!-- Task Detail Form component -->
     <TaskDetailForm :task="task" :mode="route.name">
+      <!-- Delete button for task deletion (visible in 'edit' mode) -->
       <custom-button
         v-if="route.name === 'edit'"
         color="#FC7675"
         @click="options.modelValue = true"
-        >{{ $t("deleteTask") }}</custom-button
-      ></TaskDetailForm
-    >
+      >
+        {{ $t("deleteTask") }}
+      </custom-button>
+    </TaskDetailForm>
 
+    <!-- VueFinalModal for task deletion confirmation -->
     <VueFinalModal
       v-model="options.modelValue"
       :teleport-to="options.teleportTo"
@@ -25,49 +30,53 @@
       class="flex justify-center items-center"
       content-class="max-w-xl mx-4 p-4 bg-white dark:bg-gray-900 border dark:border-gray-700 rounded-lg space-y-2"
     >
+      <!-- Modal content: Task deletion confirmation -->
       <h1 class="text-xl">{{ $t("deleteTask") }}</h1>
-      <p>
-        {{ $t("confirmDelete1") }}
-      </p>
+      <p>{{ $t("confirmDelete1") }}</p>
       <span class="title-span">
         <h1 class="task-title text-xl">{{ task.title }}</h1>
       </span>
       <span id="cancelButton">
-        <custom-button @click="options.modelValue = false" color="#ACACAC">{{
-          $t("cancel")
-        }}</custom-button></span
-      >
+        <!-- Cancel deletion button -->
+        <custom-button @click="options.modelValue = false" color="#ACACAC">
+          {{ $t("cancel") }}
+        </custom-button>
+      </span>
       <span id="deleteButton">
-        <custom-button @click="deleteTask(task)" color="#FC7675">{{
-          $t("confirmDelete2")
-        }}</custom-button></span
-      >
+        <!-- Confirm deletion button -->
+        <custom-button @click="deleteTask(task)" color="#FC7675">
+          {{ $t("confirmDelete2") }}
+        </custom-button>
+      </span>
     </VueFinalModal>
   </div>
 </template>
 
 <script setup>
+// Import necessary components and modules
 import TaskDetailForm from "../components/TaskDetailsForm.vue";
 import CustomButton from "../components/CustomButton.vue";
 import { VueFinalModal } from "vue-final-modal";
 import { useStore } from "vuex";
 import { reactive, ref, watch } from "vue";
 import ApiController from "../api/api";
-
-const store = useStore();
 import { useRoute, useRouter } from "vue-router";
+
+// Initialize Vue Router and Vuex Store
 const route = useRoute();
 const router = useRouter();
+const store = useStore();
+
+// Initialize reactive variables
 const submitResult = ref();
 const task = ref(
-  store.state.tasks.filter(function (arr) {
-    return arr.id == route.params.id;
-  })[0]
+  // Get the task based on the route parameter 'id'
+  store.state.tasks.filter((arr) => arr.id == route.params.id)[0]
 );
 
+// Watch for route changes to reset task values when adding a new task
 watch(
   () => route.name,
-
   (newRoute, oldRoute) => {
     if (route.name === "add") {
       task.value = {
@@ -85,6 +94,7 @@ watch(
   }
 );
 
+// Define options for VueFinalModal configurations
 const options = reactive({
   teleportTo: "body",
   modelValue: false,
@@ -100,32 +110,34 @@ const options = reactive({
   swipeToClose: "none",
 });
 
+// Function to delete a task
 const deleteTask = (taskToDelete) => {
+  // Ensure the user is logged in before proceeding with task deletion
   if (store.state.user.loggedIn) {
     const sendDeleteTask = async () => {
+      // Call the API to delete the task
       const data = await ApiController.deleteTask(task.value);
       submitResult.value = data;
 
       if (submitResult.value.message === "Task deleted") {
+        // Task deletion confirmation
       }
     };
     sendDeleteTask();
   }
-  const index = store.state.tasks.findIndex(
-    (key) => key.id === taskToDelete.id
-  );
 
+  // Find the index of the task to be deleted and remove it from the tasks array
+  const index = store.state.tasks.findIndex((key) => key.id === taskToDelete.id);
   options.modelValue = false;
-  setTimeout(
-    function () {
-      store.state.tasks.splice(index, 1);
-    }.bind(this),
-    1000
-  );
 
-  router.push("/" + store.state.lastViewType);
+  // Remove the task after a delay and redirect to the last view type
+  setTimeout(() => {
+    store.state.tasks.splice(index, 1);
+    router.push("/" + store.state.lastViewType);
+  }, 1000);
 };
 </script>
+
 
 <style scoped>
 p {

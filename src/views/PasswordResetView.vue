@@ -1,10 +1,13 @@
 <template>
+  <!-- Form for password recovery -->
   <div>
+    <!-- Displaying form elements based on different conditions -->
     <form
       v-if="submitResult.message !== 'Password updated'"
       class="form"
       @submit.prevent="setNewPassword"
     >
+      <!-- If email is not verified yet -->
       <span id="loginLink"
         ><router-link to="/login">{{ $t("loginProfile") }}</router-link></span
       >
@@ -18,13 +21,17 @@
         autocomplete
       />
 
+      <!-- Button to check the email for security question -->
       <custom-button v-if="!emailIsOk" @click="checkEmail" color="#458FF1">{{
         $t("recoverPassword")
       }}</custom-button>
 
+      <!-- If email is verified but answer is not yet provided -->
+      <!-- Displays security question and answer -->
       <label v-if="emailIsOk && !answerIsOk" for="question">{{
         $t("passwordQuestion")
       }}</label>
+      <!-- Readonly input field for the security question -->
       <input
         v-if="emailIsOk && !answerIsOk"
         type="text"
@@ -46,9 +53,12 @@
         required
         autocomplete="off"
       />
+      <!-- Error message if the security answer is incorrect -->
       <div class="error" v-if="submitResult.description === 'answer incorrect'">
         {{ $t("answerNotCorrect") }}
       </div>
+
+      <!-- Button to check the security answer -->
       <custom-button
         v-if="emailIsOk && !answerIsOk"
         @click="checkAnswer"
@@ -56,6 +66,8 @@
         >{{ $t("checkAnswer") }}</custom-button
       >
 
+      <!-- If security answer is verified -->
+      <!-- Allows to set a new password -->
       <label v-if="answerIsOk" for="password">{{ $t("newPassword") }}</label>
       <input
         v-if="answerIsOk"
@@ -65,9 +77,11 @@
         required
         autocomplete="off"
       />
+      <!-- Error message if the password strength is not valid -->
       <div class="error" v-if="user.password && !isValidPassword">
         {{ $t("passwordStrength") }}
       </div>
+
       <label v-if="answerIsOk" for="confirmPassword">{{
         $t("confirmPassword")
       }}</label>
@@ -80,6 +94,7 @@
         autocomplete="off"
       />
 
+      <!-- Error message if passwords do not match -->
       <div
         class="error"
         v-if="
@@ -90,11 +105,13 @@
       </div>
 
       <hr v-if="answerIsOk" />
+      <!-- Button to submit the new password -->
       <custom-button v-if="answerIsOk" type="submit" color="#458FF1">{{
         $t("setNewPassword")
       }}</custom-button>
     </form>
 
+    <!-- Displaying success message after password is updated -->
     <div v-else class="form success">
       <span
         >{{ $t("passwordResetDone")
@@ -111,6 +128,7 @@ import ApiController from "../api/api";
 export default {
   components: { CustomButton, ApiController },
   data() {
+    // Initial data setup for user details and form state
     return {
       emailIsOk: false,
       answerIsOk: false,
@@ -125,17 +143,21 @@ export default {
     };
   },
   computed: {
+    // Computed property to check if the entered password meets the required criteria
     isValidPassword() {
       const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s:])([^\s]){8,}$/;
       return regex.test(this.user.password);
     },
   },
   methods: {
+    // Function to check the email and get the security question
     checkEmail() {
+      // Async function to retrieve security question based on the provided email
       const getSecurityQuestion = async () => {
         const data = await ApiController.getSecurityQuestion(this.user.email);
         this.submitResult = data;
 
+        // If the question is found, update the user's security question and set emailIsOk flag
         if (this.submitResult.message === "Question found") {
           this.user.question = this.submitResult.question;
           this.emailIsOk = true;
@@ -144,7 +166,9 @@ export default {
 
       getSecurityQuestion();
     },
+    // Function to check the security answer
     checkAnswer() {
+      // Async function to check the security answer for the provided question and answer
       const checkSecurityAnswer = async () => {
         const data = await ApiController.checkSecurityAnswer(
           this.user.email,
@@ -153,6 +177,7 @@ export default {
         );
         this.submitResult = data;
 
+        // If the answer is correct, update the answerIsOk flag and user details
         if (this.submitResult.message === "Answer correct") {
           this.answerIsOk = true;
           this.user.id = this.submitResult.user.id;
@@ -162,12 +187,14 @@ export default {
 
       checkSecurityAnswer();
     },
-
+    // Function to set a new password
     setNewPassword() {
+      // Async function to update the user's password
       const updatePassword = async () => {
         const data = await ApiController.updatePassword(this.user);
         this.submitResult = data;
 
+        // If the password is updated, update the user's password and route to login page after a delay
         if (this.submitResult.message === "Password updated") {
           this.$store.state.user.password = this.user.password;
 

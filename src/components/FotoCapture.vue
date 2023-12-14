@@ -1,50 +1,64 @@
 <template>
-      <label for="photo">{{ $t("picture") }}</label>
-      <img id="profile" :src="imageUrl" alt="Foto de perfil" />
-      <input type="file" id="photo" v-on:change="onFileChanged" style="display: none;" />
-<input type="button" :value="$t('browseFoto')" onclick="document.getElementById('photo').click();" />
- 
+  <!-- Image upload section -->
+  <label for="photo">{{ $t("picture") }}</label>
+  <!-- Label for photo input -->
+  <img id="profile" :src="imageUrl" alt="Foto de perfil" />
+  <!-- Displaying the profile image -->
+  <input
+    type="file"
+    id="photo"
+    v-on:change="onFileChanged"
+    style="display: none"
+  />
+  <!-- Hidden file input for photo upload -->
+  <input
+    type="button"
+    :value="$t('browseFoto')"
+    onclick="document.getElementById('photo').click();"
+  />
+  <!-- Button to trigger file input -->
 </template>
 
 <script setup>
-import {ref,onMounted} from "vue"
+// Importing necessary Vue composition API functions
+import { ref, onMounted, defineProps, defineEmits } from "vue";
 
-const props = defineProps(["base64"]);
-const imageUrl = ref('resources/profile_animated.gif');
+// Defining props and emits
+const props = defineProps(["base64"]); // Props for base64 image data
+const imageUrl = ref("resources/profile_animated.gif"); // Reference for image URL
 
-const emit = defineEmits(['on-selected']);
+const emit = defineEmits(["on-selected"]); // Emitting event on image selection
 
+// Executing code when the component is mounted
 onMounted(() => {
-  if(props.base64) {
-    imageUrl.value='data:image/jpeg;base64,'+props.base64
+  // Setting the image URL if base64 data is provided in props
+  if (props.base64) {
+    imageUrl.value = "data:image/jpeg;base64," + props.base64;
   }
 });
 
-
+// Method to handle file input change
 const onFileChanged = (event) => {
-  const file = event.target.files[0];
+  const file = event.target.files[0]; // Getting the selected file
   if (file) {
-    const reader = new FileReader();
+    const reader = new FileReader(); // Creating a FileReader object
     reader.onload = (e) => {
-      imageUrl.value = e.target.result;
-      const base64Data = imageUrl.value.split(",")[1];
-      emit('on-selected', base64Data);
+      imageUrl.value = e.target.result; // Setting the image URL to the uploaded file
+      const base64Data = imageUrl.value.split(",")[1]; // Extracting base64 data
+      emit("on-selected", base64Data); // Emitting 'on-selected' event with base64 data
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file); // Reading the file as a data URL
   }
 };
-
 </script>
-
 
 <style scoped>
 #profile {
-    border-radius: 50%;
-    overflow: hidden;
-    width: 80px;
-    height:80px;
-    margin: 0 auto;
-    
+  border-radius: 50%;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
 }
 label {
   display: block;

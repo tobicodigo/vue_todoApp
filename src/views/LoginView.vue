@@ -1,16 +1,13 @@
 <template>
+  <!-- Login form if user is not logged in -->
   <div>
-    <form
-      class="form"
-      @submit.prevent="login"
-      v-if="!store.state.user.loggedIn"
-    >
-      <span id="registerLink"
-        ><router-link to="/register">{{
-          $t("registerProfile")
-        }}</router-link></span
-      >
+    <form class="form" @submit.prevent="login" v-if="!store.state.user.loggedIn">
+      <!-- Link to Register -->
+      <span id="registerLink">
+        <router-link to="/register">{{ $t("registerProfile") }}</router-link>
+      </span>
 
+      <!-- Input for email -->
       <label for="email">{{ $t("email") }}</label>
       <input
         type="email"
@@ -20,6 +17,7 @@
         autocomplete="off"
       />
 
+      <!-- Input for password -->
       <label for="password">{{ $t("password") }}</label>
       <input
         type="password"
@@ -28,56 +26,62 @@
         required
         autocomplete="off"
       />
-      <div
-        class="error"
-        v-if="submitResult.description === 'Login not correct'"
-      >
+
+      <!-- Error message for incorrect login -->
+      <div class="error" v-if="submitResult.description === 'Login not correct'">
         {{ $t("passwordNotCorrect") }}
       </div>
+
       <hr />
-      <custom-button type="submit" color="#458FF1">{{
-        $t("login")
-      }}</custom-button>
-      <span id="passwordLink"
-        ><router-link to="/password">{{
-          $t("forgotPassword")
-        }}</router-link></span
-      >
+
+      <!-- Login button -->
+      <custom-button type="submit" color="#458FF1">{{ $t("login") }}</custom-button>
+
+      <!-- Link for forgotten password -->
+      <span id="passwordLink">
+        <router-link to="/password">{{ $t("forgotPassword") }}</router-link>
+      </span>
     </form>
 
+    <!-- Welcome message if user is logged in -->
     <welcome-box v-else showAddbutton="true" :title="$t('thanksForLogin')">
+      <!-- Button to show user's tasks -->
       <div class="centered">
-        <router-link to="/home"
-          ><custom-button class="smallButton" color="#458FF1">{{
-            $t("showMyTasks")
-          }}</custom-button></router-link
-        >
+        <router-link to="/home">
+          <custom-button class="smallButton" color="#458FF1">
+            {{ $t("showMyTasks") }}
+          </custom-button>
+        </router-link>
       </div>
     </welcome-box>
   </div>
 </template>
 
 <script setup>
+// Importing necessary components and hooks
 import { ref } from "vue";
 import CustomButton from "../components/CustomButton.vue";
 import WelcomeBox from "../components/WelcomeBox.vue";
-
 import ApiController from "../api/api";
 import store from "@/store/store";
 
+// Creating reactive references for user, submission result, and login status
 const user = ref({});
 const submitResult = ref({});
 const loginIsOk = ref(false);
 
+// Function for user login
 const login = async () => {
   const data = await ApiController.login(user.value);
   submitResult.value = data;
 
+  // If login successful, set login status
   if (submitResult.value.message === "Login succesfull") {
     loginIsOk.value = true;
   }
 };
 </script>
+
 
 <style scoped>
 #registerLink {

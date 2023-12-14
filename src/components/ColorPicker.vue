@@ -1,6 +1,8 @@
 <template>
+  <!-- Rendering color options -->
   <div class="color-options">
     <label v-for="(color, index) in store.state.colors" :key="index">
+      <!-- Radio input for each color option -->
       <input
         type="radio"
         name="color"
@@ -9,6 +11,7 @@
         @change="handleChange(index)"
       />
 
+      <!-- Displaying color preview -->
       <span
         class="color"
         :style="{ backgroundColor: 'var(' + color + ')' }"
@@ -18,25 +21,31 @@
 </template>
 
 <script setup>
+// Importing necessary modules
 import { useStore } from "vuex";
 import { ref, defineProps, defineEmits } from "vue";
+
+// Accessing the Vuex store
 const store = useStore();
 
+// Defining props and emits
 const props = defineProps({
-  modelValue: Number,
+  modelValue: Number, // Model value for the selected color
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue"]); // Emitting update event for modelValue
 
+// Ref for the selected color option
 const selectedOption = ref(props.modelValue);
 
+// Method to check if a color option is selected
 const isChecked = (value) => {
-  //  alert(value + " "+selectedOption.value + " " + (value === selectedOption.value) )
-  return value === selectedOption.value;
+  return value === selectedOption.value; // Returning true if the value matches the selected option
 };
 
+// Method to handle color option change
 const handleChange = (value) => {
-  selectedOption.value = value;
-  emit("update:modelValue", selectedOption.value);
+  selectedOption.value = value; // Updating selectedOption ref with the new value
+  emit("update:modelValue", selectedOption.value); // Emitting update event with the new selected value
 };
 </script>
 

@@ -1,84 +1,94 @@
-<template><div>
-  <form class="form" @submit.prevent>
-    <label for="task-date">{{ $t("filterStartDate") }}</label>
-    <input type="date" id="task-date" v-model="filter.startDate" />
-    <label for="task-date">{{ $t("filterEndDate") }}</label>
-    <input type="date" id="task-date" v-model="filter.endDate" />
+<template>
+  <!-- Form for applying filters -->
+  <div>
+    <form class="form" @submit.prevent>
+      <!-- Filter by start date -->
+      <label for="task-date">{{ $t("filterStartDate") }}</label>
+      <input type="date" id="task-date" v-model="filter.startDate" />
 
-    <label for="color-picker">{{ $t("pickColor") }}</label>
-    <color-picker
-      id="color-picker"
-      v-model="filter.color"
-      :key="filter.color"
-    ></color-picker>
+      <!-- Filter by end date -->
+      <label for="task-date">{{ $t("filterEndDate") }}</label>
+      <input type="date" id="task-date" v-model="filter.endDate" />
 
-    <label for="task-type">{{ $t("taskType") }}</label>
-    <select id="task-type" v-model="filter.type">
-      <option value="none"></option>
-      <option
-        v-for="(type, index) in store.state.types"
-        :key="index"
-        :value="index"
-      >
-        {{ type }}
-      </option>
-    </select>
+      <!-- Filter by color using ColorPicker component -->
+      <label for="color-picker">{{ $t("pickColor") }}</label>
+      <color-picker
+        id="color-picker"
+        v-model="filter.color"
+        :key="filter.color"
+      ></color-picker>
 
-    <hr />
-    <custom-button type="submit" color="#458FF1" @click="applyFilter">{{
-      $t("filterTask")
-    }}</custom-button>
+      <!-- Filter by task type using select dropdown -->
+      <label for="task-type">{{ $t("taskType") }}</label>
+      <select id="task-type" v-model="filter.type">
+        <option value="none"></option>
+        <option
+          v-for="(type, index) in store.state.types"
+          :key="index"
+          :value="index"
+        >
+          {{ type }}
+        </option>
+      </select>
 
-    <custom-button type="submit" color="#ACACAC" @click="resetFilter">{{
-      $t("resetFilter")
-    }}</custom-button>
-    <slot></slot>
-  </form>
-</div>
+      <hr />
+
+      <!-- Apply filter button -->
+      <custom-button type="submit" color="#458FF1" @click="applyFilter">
+        {{ $t("filterTask") }}
+      </custom-button>
+
+      <!-- Reset filter button -->
+      <custom-button type="submit" color="#ACACAC" @click="resetFilter">
+        {{ $t("resetFilter") }}
+      </custom-button>
+      <slot></slot>
+    </form>
+  </div>
 </template>
 
 <script setup>
+// Importing necessary components and hooks
 import CustomButton from "../components/CustomButton.vue";
 import ColorPicker from "../components/ColorPicker.vue";
-import { ref,onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
+
+// Creating references
 const i18n = useI18n();
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
 
-const filter = ref({})
+// Creating a reactive reference for filter state
+const filter = ref({});
 
+// Executing code on component mount
 onMounted(() => {
-  store.state.filter={}
-  if(Object.keys(store.state.savedFilter).length>0) {
-
-  filter.value = store.state.savedFilter
+  // Resetting store filter state and setting saved filter if available
+  store.state.filter = {};
+  if (Object.keys(store.state.savedFilter).length > 0) {
+    filter.value = store.state.savedFilter;
   }
 });
 
-
+// Applying filter logic
 const applyFilter = () => {
-  setTimeout(
-    function () {
-      store.state.savedFilter = filter.value
-      store.state.filter = store.state.savedFilter;
-      filter.value={}
-    },
-    1000
-  );
+  setTimeout(function () {
+    store.state.savedFilter = filter.value;
+    store.state.filter = store.state.savedFilter;
+    filter.value = {};
+  }, 1000);
   router.push("/" + store.state.lastViewType);
-
 };
 
+// Resetting filter logic
 const resetFilter = () => {
-  store.state.filter={}
-  store.state.savedFilter={}
-  filter.value={}
-
-
+  store.state.filter = {};
+  store.state.savedFilter = {};
+  filter.value = {};
 };
 </script>
 

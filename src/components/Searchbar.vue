@@ -1,4 +1,5 @@
 <template>
+  <!-- Ionic search bar component -->
   <ion-searchbar
     show-clear-button="always"
     :clear-icon="trashBin"
@@ -8,16 +9,16 @@
 </template>
 
 <script>
+// Importing necessary Ionic Vue components and Vue functions
 import { IonSearchbar } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { trashBin } from "ionicons/icons";
 
 export default defineComponent({
-  components: { IonSearchbar },
+  components: { IonSearchbar }, // Registering IonSearchbar component
   setup() {
-    return { trashBin};
+    return { trashBin }; // Exposing trashBin icon for use in the template
   },
-  
 });
 </script>
 
@@ -27,7 +28,5 @@ ion-searchbar {
 }
 
 @media screen and (max-width: 579px) {
-
 }
-
 </style>
