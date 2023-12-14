@@ -12,17 +12,19 @@ Universidad La Salle - Task App Project
 
 
 [Website][website-url]
+
 [Appstore][appstore-url]
+
 [Playstore][playstore-url]
 
 
-### Built With
+## Built With
 
 * [![Vue][Vue.js]][Vue-url]
 
 
 
-### Installation
+## Installation
 
 To install follow these steps:
 
